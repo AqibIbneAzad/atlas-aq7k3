@@ -2564,6 +2564,41 @@ const App = {
     this.persist(); this.closeModal(); this.renderAll();
     this.toast('\u2713 Profit added \u2014 '+p.name+' renewed');
   },
+  redeemPos(posId){
+    const p=this.data.positions.find(x=>x.id===posId); if(!p) return;
+    const f=Calc.fundById(p.fundId); const kind=f?f.type:'other';
+    const banks=this.data.funds.filter(x=>x.type==='bank'||x.type==='cash');
+    const isAlt=(kind==='other');
+    const d=this.posMetrics(p).d;
+    const estPayout=this.posPayout(p);
+    const body=`<p class="hint" style="margin:0 0 12px"><b>${p.name}</b> \u2014 record the money you actually received. The principal plus profit is credited to the account you choose, and the instrument closes out.</p>
+      ${isAlt?`<div class="field"><label>Actual return received (%)</label>
+        <input type="number" step="any" id="rd_actual" value="${p.actualReturn!==undefined&&p.actualReturn!==''?p.actualReturn:''}" placeholder="e.g. 13.5">
+        <div class="hint">Leave blank to use the expected return. Enter the real figure iFarmer paid.</div></div>`:''}
+      <div class="field"><label>Money received into</label>
+        <select id="rd_to"><option value="">\u2014 choose account \u2014</option>
+          ${banks.map(b=>`<option value="${b.id}" ${p.payoutTo===b.id?'selected':''}>${b.name}</option>`).join('')}</select></div>
+      <div class="field"><label>Date received</label><input type="date" id="rd_date" value="${p.settledDate||todayStr()}"></div>
+      <div style="background:var(--bg2);border-radius:12px;padding:12px;margin:6px 0 14px">
+        <div style="display:flex;justify-content:space-between"><span class="caption">ESTIMATED PAYOUT</span>
+          <span class="mono" style="font-weight:800" id="rd_est">${fmt(estPayout)}</span></div></div>
+      <button class="btn primary" onclick="App.confirmRedeem('${posId}')">Confirm \u2014 credit ${CUR} to account</button>`;
+    this.openModal('\u25c9 Redeem \u2014 '+p.name, body);
+    if(isAlt){ setTimeout(()=>{ const a=document.getElementById('rd_actual');
+      if(a) a.oninput=()=>{ const v=parseFloat(a.value);
+        const est=(!isNaN(v))? (+p.principal||0)*(1+v/100) : estPayout;
+        const e=document.getElementById('rd_est'); if(e) e.textContent=fmt(est); }; },40); }
+  },
+  confirmRedeem(posId){
+    const p=this.data.positions.find(x=>x.id===posId);
+    const to=document.getElementById('rd_to').value;
+    if(!to){ this.toast('\u26a0 Choose the account the money went into'); return; }
+    const a=document.getElementById('rd_actual');
+    if(a){ const v=a.value.trim(); if(v!=='') p.actualReturn=parseFloat(v); }
+    p.payoutTo=to; p.settled=true; p.settledDate=document.getElementById('rd_date').value||todayStr();
+    this.syncAuto(); this.persist(); this.closeModal(); this.renderAll();
+    this.toast('\u2713 '+p.name+' redeemed \u2014 '+fmt(this.posPayout(p))+' credited');
+  },
   posPayout(p){
     const {kind,d}=this.posMetrics(p);
     if(!d) return +p.principal||0;
@@ -3039,6 +3074,23 @@ const App = {
           <div class="caption">${hs.length} scrip${hs.length===1?'':'s'} \u00b7 market value ${fmt(mv)}</div></div>
           <div class="pill" onclick="App.nav('equity',document.querySelector('[data-sec=equity]'))">Open Equity Desk \u2192</div></div></div>`;
       }
+      if(['gold','asset','pf','wppf'].includes(f.type)){
+        const val=Calc.fundValue(f.id);
+        const linked=!!f.fundedFrom;
+        const srcName = f.fundedFrom==='__opening__'?'Opening Balances':(Calc.fundById(f.fundedFrom)?Calc.fundById(f.fundedFrom).name:'\u26a0 not linked \u2014 fix this');
+        const extra = f.type==='gold'? `${f.goldQty||0} ${f.goldUnit||''} \u00d7 ${fmt(f.goldRate||0)}/unit`
+                     : f.disposed? 'sold / redeemed' : 'current value';
+        return `<div class="card"><div class="card-head"><div><h3><span class="fund-badge" style="background:${c}"></span>${f.name}</h3>
+          <div class="caption">${FUND_TYPES[f.type].label} \u00b7 ${extra}</div></div>
+          <div class="pill accent" onclick="App.formFund(App.data.funds.find(x=>x.id==='${f.id}'))">\u270e Edit</div></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:10px">
+            <div><div class="caption">VALUE</div><div style="font-size:22px;font-weight:800" class="mono">${fmt(val)}</div></div>
+            <div style="text-align:right"><div class="caption">FUNDED FROM</div>
+              <div style="font-size:12.5px;font-weight:600;color:${linked?'var(--txt-dim)':'var(--red)'}">\u21c4 ${srcName}</div></div>
+          </div>
+          ${!linked?`<p class="hint" style="color:var(--red);margin-top:10px">This asset isn't linked to a source. Tap Edit \u2192 Money Trail and choose where it came from.</p>`:''}
+        </div>`;
+      }
       const pos=this.positionsOf(f.id);
       const posTotal=this.fundPosTotal(f.id);
       const drift=bal-posTotal;
@@ -3068,6 +3120,7 @@ const App = {
           <td>${status}${p.fundedFrom?'<div style="font-size:10px;color:var(--txt-mute);margin-top:3px">\u26ad '+this.fundName(p.fundedFrom)+'</div>':''}</td>
           <td class="row-actions" style="white-space:nowrap">
             ${(kind==='fd'&&d&&d.awaiting)?`<button onclick="App.enterProfit('${p.id}')" title="Declare profit for matured term" style="color:var(--cyan)">\u25c9</button>`:''}
+            ${(mat&&mat.days<=0&&!p.settled&&kind!=='dps')?`<button onclick="App.redeemPos('${p.id}')" title="Redeem \u2014 credit payout to account" style="color:var(--green);font-weight:700">\u21b5</button>`:''}
             <button onclick="App.formPosition('${f.id}','${p.id}')">\u270e</button>
             <button onclick="App.delPosition('${p.id}')">\u{1f5d1}</button></td></tr>`;
       }).join('');
@@ -3700,7 +3753,7 @@ const App = {
       const linked=!!p.fundedFrom;
       const needDest=!!p.settled;
       const destOk=!needDest || !!p.payoutTo;
-      rows.push({name:p.name, kind:FUND_TYPES[f.type].label, group:f.name,
+      rows.push({id:p.id, isFund:false, fundId:p.fundId, name:p.name, kind:FUND_TYPES[f.type].label, group:f.name,
         source: linked?nameFund(p.fundedFrom):'', dest: p.settled?(p.payoutTo?nameFund(p.payoutTo):''):'\u2014',
         status:(linked&&destOk)?'ok':'fail',
         issue: !linked?'no funding source':(!destOk?'settled but no payout head':'')});
@@ -3710,7 +3763,7 @@ const App = {
       this.data.funds.filter(f=>f.type===tp).forEach(f=>{
         const linked=!!f.fundedFrom;
         const destOk=!f.disposed || !!f.disposalTo;
-        rows.push({name:f.name, kind:FUND_TYPES[tp].label, group:'\u2014',
+        rows.push({id:f.id, isFund:true, name:f.name, kind:FUND_TYPES[tp].label, group:'\u2014',
           source: linked?nameFund(f.fundedFrom):'', dest: f.disposed?(f.disposalTo?nameFund(f.disposalTo):''):'\u2014',
           status:(linked&&destOk)?'ok':'fail',
           issue: !linked?'no funding source':(!destOk?'sold but no destination head':'')});
@@ -3719,6 +3772,15 @@ const App = {
     return rows;
   },
 
+  fixLink(id,isFund){
+    if(isFund==='true'||isFund===true){ const f=Calc.fundById(id); if(f) this.formFund(f); }
+    else { const p=this.data.positions.find(x=>x.id===id); if(p) this.formPosition(p.fundId,p.id); }
+  },
+  markOpening(id,isFund){
+    if(isFund==='true'||isFund===true){ const f=Calc.fundById(id); if(f){ f.fundedFrom='__opening__'; } }
+    else { const p=this.data.positions.find(x=>x.id===id); if(p){ p.fundedFrom='__opening__'; } }
+    this.syncAuto(); this.persist(); this.renderAll(); this.toast('\u2713 Marked as Opening Balance \u2014 audited');
+  },
   buildHealth(){
     this.ensureInv(); const out=[];
     const add=(status,title,detail)=>out.push({status,title,detail}); // status: ok | warn | fail
@@ -3860,7 +3922,10 @@ const App = {
             <td style="font-size:12px;color:var(--txt-dim)">${r.kind}</td>
             <td class="mono" style="font-size:12px">${r.source||'<span style="color:var(--red)">\u2014 none \u2014</span>'}</td>
             <td class="mono" style="font-size:12px">${r.dest}</td>
-            <td>${badge(r.status)}</td></tr>`).join('')}</tbody></table></div>
+            <td>${badge(r.status)}${r.status!=='ok'?`<div style="display:flex;gap:4px;margin-top:5px">
+              <button onclick="App.fixLink('${r.id}','${r.isFund}')" style="font-size:10.5px;padding:4px 8px;border-radius:7px;border:1px solid var(--stroke2);background:var(--bg2);color:var(--accent);cursor:pointer">Fix</button>
+              ${r.issue==='no funding source'?`<button onclick="App.markOpening('${r.id}','${r.isFund}')" style="font-size:10.5px;padding:4px 8px;border-radius:7px;border:1px solid var(--stroke2);background:var(--bg2);color:var(--txt-dim);cursor:pointer">Opening</button>`:''}
+              </div>`:''}</td></tr>`).join('')}</tbody></table></div>
           <p class="hint" style="margin-top:10px">\u201cOpening Balances\u201d is a valid source for anything you owned before you started tracking \u2014 it audits the item without deducting cash twice.</p></div>`; })()}`;
   },
 
