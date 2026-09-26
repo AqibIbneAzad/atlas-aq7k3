@@ -950,6 +950,75 @@ const App = {
     clearTimeout(this._tt); this._tt=setTimeout(()=>t.classList.remove('show'),2600); },
 
   /* ---------- MODAL ---------- */
+  fundDetail(fid){
+    const f=Calc.fundById(fid); if(!f) return;
+    this.ensureInv();
+    const isCard=f.type==='credit';
+    const val=Calc.fundValue(fid);
+    // all transactions touching this fund
+    const tx=this.data.txns.filter(x=> x.fundId===fid || x.fromFundId===fid || x.toFundId===fid)
+      .sort((a,b)=>b.date.localeCompare(a.date));
+    let tin=0,tout=0;
+    tx.forEach(x=>{
+      if(x.type==='income' && x.fundId===fid) tin+=x.amount;
+      else if(x.type==='expense' && x.fundId===fid) tout+=x.amount;
+      else if(x.type==='valuation' && x.fundId===fid){ if(x.amount>=0) tin+=x.amount; else tout+=-x.amount; }
+      else if(x.type==='transfer'){ if(x.toFundId===fid) tin+=x.amount; if(x.fromFundId===fid) tout+=x.amount; }
+    });
+    // monthly closing balance series
+    const months=Calc.allMonths();
+    const series=months.map(m=>Calc.fundValue(fid,m));
+    // recent rows with direction
+    const rows=tx.slice(0,15).map(x=>{
+      let dir='',amt=0,cls='',note=x.note||x.category||'';
+      if(x.type==='transfer'){ if(x.toFundId===fid){dir='in';amt=x.amount;cls='pos';note=note||('from '+this.fundName(x.fromFundId));}
+        else {dir='out';amt=x.amount;cls='neg';note=note||('to '+this.fundName(x.toFundId));} }
+      else if(x.type==='income'){dir='in';amt=x.amount;cls='pos';}
+      else if(x.type==='expense'){dir='out';amt=x.amount;cls='neg';}
+      else if(x.type==='valuation'){dir=x.amount>=0?'in':'out';amt=Math.abs(x.amount);cls=x.amount>=0?'pos':'neg';}
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--stroke)">
+        <div style="min-width:0"><div style="font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${x.auto?'\u26ad ':''}${note}</div>
+          <div style="font-size:10.5px;color:var(--txt-mute)">${x.date} \u00b7 ${x.type}</div></div>
+        <div class="mono ${cls}" style="font-weight:700;white-space:nowrap">${dir==='in'?'+':'-'}${fmt(amt)}</div></div>`;
+    }).join('') || '<div class="empty" style="padding:20px">No transactions touch this account yet</div>';
+
+    // breakdown block for investment funds
+    let breakdown='';
+    if(f.type==='stock'){
+      const hs=this.holdingsOf(fid);
+      if(hs.length) breakdown=`<div style="margin-top:6px">${this.svgBars(hs.map(h=>{const m=Inv.stock(h);return{label:h.ticker,value:m.mv,note:fmt(m.mv),color:'var(--grad)'};}))}</div>`;
+    } else {
+      const pos=this.positionsOf(fid);
+      if(pos.length) breakdown=`<div style="margin-top:6px">${this.svgBars(pos.map(p=>({label:p.name,value:this.posValue(p),note:fmt(this.posValue(p)),color:'var(--grad)'})))}</div>`;
+    }
+    const un=(f.valueSource==='instruments')?Calc.fundUnaccounted(fid):0;
+
+    const body=`
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4px">
+        <div><div class="caption">${isCard?'OWED':'BALANCE'}</div>
+          <div style="font-size:28px;font-weight:800" class="mono ${isCard?'neg':''}">${fmt(val)}</div></div>
+        <span class="tag" style="background:${FUND_TYPES[f.type].color}22;color:${FUND_TYPES[f.type].color}">${FUND_TYPES[f.type].label}</span>
+      </div>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0">
+        <div style="background:var(--bg2);border-radius:11px;padding:10px"><div class="caption">IN</div><div class="mono pos" style="font-weight:700">${fmt(tin)}</div></div>
+        <div style="background:var(--bg2);border-radius:11px;padding:10px"><div class="caption">OUT</div><div class="mono neg" style="font-weight:700">${fmt(tout)}</div></div>
+        <div style="background:var(--bg2);border-radius:11px;padding:10px"><div class="caption">ENTRIES</div><div class="mono" style="font-weight:700">${tx.length}</div></div>
+      </div>
+      ${series.some(v=>v>0)?`<div class="caption" style="margin-bottom:4px">BALANCE TREND</div><div style="height:130px;margin-bottom:8px"><canvas id="fdChart"></canvas></div>`:''}
+      ${un&&Math.abs(un)>1000?`<p class="hint" style="color:var(--amber)">\u26ad ${fmt(un)} here isn't covered by an instrument entry. <span style="color:var(--accent);cursor:pointer" onclick="App.closeModal();App.nav('health')">Open Financial Check to fix \u2192</span></p>`:''}
+      ${breakdown?`<div class="caption" style="margin:10px 0 2px">HOLDINGS BREAKDOWN</div>${breakdown}`:''}
+      <div class="caption" style="margin:14px 0 2px">RECENT ACTIVITY</div>
+      <div style="max-height:260px;overflow-y:auto">${rows}</div>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <button class="btn ghost" style="flex:1" onclick="App.closeModal();App.formFund(App.data.funds.find(x=>x.id==='${fid}'))">\u270e Edit account</button>
+        <button class="btn primary" style="flex:1" onclick="App.closeModal();App.formTxn('transfer')">\u21c4 New transfer</button>
+      </div>`;
+    this.openModal(f.name, body);
+    if(series.some(v=>v>0)) setTimeout(()=>{ this.chart('fdChart',{type:'line',
+      data:{labels:months.map(monthLabel),datasets:[{data:series,borderColor:FUND_TYPES[f.type].color,
+        backgroundColor:this.gradient('fdChart',FUND_TYPES[f.type].color+'44',FUND_TYPES[f.type].color+'00'),fill:true}]},
+      options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>CUR+(v/1000).toFixed(0)+'k'}}}}}); },60);
+  },
   openModal(title,html){ document.getElementById('modalTitle').textContent=title;
     document.getElementById('modalBody').innerHTML=html; document.getElementById('modalBg').classList.add('open'); },
   closeModal(){ document.getElementById('modalBg').classList.remove('open'); },
@@ -1867,7 +1936,7 @@ const App = {
     const rows=this.data.funds.map(f=>{ const bal=Calc.fundValue(f.id), inv=FUND_TYPES[f.type].invest;
       const invd=inv?Calc.fundInvested(f.id):null; const gain=inv?bal-invd:null;
       return `<tr>
-        <td><span class="fund-badge" style="background:${FUND_TYPES[f.type].color}"></span><b>${f.name}</b></td>
+        <td style="cursor:pointer" onclick="App.fundDetail('${f.id}')"><span class="fund-badge" style="background:${FUND_TYPES[f.type].color}"></span><b style="border-bottom:1px dotted var(--stroke2)">${f.name}</b> <span style="color:var(--txt-mute);font-size:11px">\u203a</span></td>
         <td><span class="tag" style="background:${FUND_TYPES[f.type].color}22;color:${FUND_TYPES[f.type].color}">${FUND_TYPES[f.type].label}</span></td>
         <td class="mono"><b>${f.type==='credit'?'<span class="neg">('+fmt(bal)+')</span>':fmt(bal)}</b></td>
         <td class="mono">${inv?fmt(invd):(f.type==='credit'?'owed':'—')}</td>
@@ -2450,9 +2519,14 @@ const App = {
       // --- 3. SETTLEMENT: matured instrument pays principal + profit back out
       if(p.settled && dst && Calc.fundById(dst)){
         const payout=this.posPayout(p);
+        const cost=this.posCost(p);
+        const gain=payout-cost;                       // realised profit (or loss)
         const m=this.posMaturity(p);
-        const when=p.settledDate||(m?m.date:todayStr());
-        if(payout>0) push(p.id,'settle',0,{date:when>todayStr()?todayStr():when,type:'transfer',amount:payout,
+        let when=p.settledDate||(m?m.date:todayStr()); if(when>todayStr()) when=todayStr();
+        // book the profit into the fund first, so paying out the full amount doesn't drive it negative
+        if(Math.abs(gain)>0.5) push(p.id,'gain',0,{date:when,type:'valuation',amount:gain,fundId:p.fundId,
+          note:p.name+(gain>=0?' \u2014 profit realised on maturity':' \u2014 loss realised on maturity')});
+        if(payout>0) push(p.id,'settle',0,{date:when,type:'transfer',amount:payout,
           fromFundId:p.fundId,toFundId:dst,note:p.name+' matured \u2014 principal + return'});
       }
     });
