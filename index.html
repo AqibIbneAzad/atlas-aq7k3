@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,33 +22,36 @@
 <style>
 /* ============ DESIGN TOKENS ============ */
 :root{
-  --bg:#060910; --bg2:#0c111d; --panel:rgba(22,30,48,.58); --panel-solid:#131b2c; --bg-elev:#131b2c;
-  --stroke:rgba(255,255,255,.09); --stroke2:rgba(255,255,255,.14);
-  --txt:#e8edf6; --txt-dim:#94a3b8; --txt-mute:#5b6b82;
-  --accent:#6494ff; --accent2:#8b6cff; --gold:#ecc158;
-  --green:#2fd68a; --red:#ff6b6b; --amber:#ffb454; --cyan:#3ad0e0;
-  --grad:linear-gradient(135deg,#6494ff,#8b6cff);
-  --bg-elev:#131b2c;
-  --grad-gold:linear-gradient(135deg,#e0b34d,#f0d78a);
-  --shadow:0 10px 40px rgba(0,0,0,.45);
-  --radius:20px; --radius-sm:13px;
-  --blur:blur(16px) saturate(140%);
+  /* Light-first, mint & charcoal */
+  --bg:#eef1f5; --bg2:#e7ebf1; --panel:#ffffff; --panel-solid:#ffffff; --bg-elev:#ffffff;
+  --stroke:rgba(17,34,51,.07); --stroke2:rgba(17,34,51,.13);
+  --txt:#101d2e; --txt-dim:#5a6b7f; --txt-mute:#93a1b3;
+  --accent:#12c98c; --accent2:#0bb98f; --gold:#e0a63a;
+  --green:#12b981; --red:#f2506e; --amber:#f59e0b; --cyan:#0ea5b7;
+  --grad:linear-gradient(135deg,#1ad39a,#0fb98f);
+  --grad-soft:linear-gradient(135deg,rgba(18,201,140,.14),rgba(11,185,143,.14));
+  --grad-gold:linear-gradient(135deg,#e0a63a,#f0cf7e);
+  --charcoal:#14181d; --charcoal2:#1c222a;
+  --shadow:0 12px 34px rgba(40,60,100,.10);
+  --shadow-lg:0 20px 50px rgba(40,60,100,.16);
+  --radius:22px; --radius-sm:14px;
+  --blur:blur(14px) saturate(150%);
   --font:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Inter,Roboto,system-ui,sans-serif;
 }
-[data-theme="light"]{
-  --bg:#eef2f9; --bg2:#e3e9f4; --panel:rgba(255,255,255,.72); --panel-solid:#ffffff;
-  --stroke:rgba(15,30,60,.10); --stroke2:rgba(15,30,60,.16);
-  --txt:#12203a; --txt-dim:#516074; --txt-mute:#8b98ab;
-  --shadow:0 10px 34px rgba(40,60,110,.16);
+[data-theme="dark"]{
+  --bg:#0c0f12; --bg2:#12161b; --panel:#171c22; --panel-solid:#171c22; --bg-elev:#1c222a;
+  --stroke:rgba(255,255,255,.08); --stroke2:rgba(255,255,255,.14);
+  --txt:#eaf0f2; --txt-dim:#9aa7b3; --txt-mute:#66727e;
+  --charcoal:#0c0f12; --charcoal2:#171c22;
+  --shadow:0 14px 40px rgba(0,0,0,.5); --shadow-lg:0 22px 60px rgba(0,0,0,.6);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
   font-family:var(--font); color:var(--txt); background:var(--bg);
   background-image:
-    radial-gradient(1100px 620px at 10% -10%, rgba(100,148,255,.20), transparent 60%),
-    radial-gradient(950px 520px at 110% 8%, rgba(139,108,255,.17), transparent 55%),
-    radial-gradient(760px 760px at 55% 125%, rgba(34,197,94,.07), transparent 62%);
+    radial-gradient(900px 480px at 100% -12%, rgba(18,201,140,.12), transparent 60%),
+    radial-gradient(700px 500px at -5% 105%, rgba(11,185,143,.08), transparent 60%);
   background-attachment:fixed; -webkit-font-smoothing:antialiased;
   transition:background .5s ease,color .3s ease;
 }
@@ -67,7 +70,7 @@ body{
 .brand{padding:4px 8px 14px}
 .brand .logo{width:40px;height:40px;border-radius:12px;background:var(--grad);
   display:grid;place-items:center;font-weight:800;font-size:20px;color:#fff;
-  box-shadow:0 6px 18px rgba(91,140,255,.45);position:relative;overflow:hidden}
+  box-shadow:0 6px 18px rgba(18,207,143,.45);position:relative;overflow:hidden}
 .brand .logo::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.35),transparent 50%)}
 .brand h1{font-size:16px;font-weight:800;letter-spacing:.3px;line-height:1}
 .brand span{font-size:10.5px;color:var(--txt-dim);letter-spacing:1.6px;text-transform:uppercase}
@@ -77,7 +80,7 @@ body{
   cursor:pointer;color:var(--txt-dim);font-size:13.5px;font-weight:500;transition:.18s;
   border:1px solid transparent}
 .nav-item:hover{background:var(--stroke);color:var(--txt)}
-.nav-item.active{background:var(--grad);color:#fff;box-shadow:0 6px 16px rgba(91,140,255,.35);border-color:transparent}
+.nav-item.active{background:var(--grad);color:#fff;box-shadow:0 6px 16px rgba(18,207,143,.35);border-color:transparent}
 .nav-item .ic{width:18px;text-align:center;font-size:15px}
 .sidebar-foot{margin-top:auto;font-size:10.5px;color:var(--txt-mute);padding:12px;line-height:1.5;border-top:1px solid var(--stroke)}
 .botnav{display:none;position:fixed;bottom:0;left:0;right:0;height:64px;z-index:60;
@@ -88,9 +91,10 @@ body{
   font-size:10px;font-weight:600;color:var(--txt-mute);cursor:pointer;padding:8px 4px;border-radius:12px;transition:.15s;letter-spacing:.2px}
 .botnav-item .bic{font-size:19px;line-height:1}
 .botnav-item.active{color:var(--accent)}
+.botnav-item.active .bic{transform:translateY(-1px)}
 .botnav-add{flex:0 0 auto;width:52px;height:52px;border-radius:17px;border:none;margin-top:-18px;
   background:var(--grad);color:#fff;font-size:26px;font-weight:300;cursor:pointer;
-  box-shadow:0 8px 22px rgba(91,140,255,.5);display:grid;place-items:center;transition:transform .15s}
+  box-shadow:0 8px 22px rgba(18,207,143,.5);display:grid;place-items:center;transition:transform .15s}
 .botnav-add:active{transform:scale(.92)}
 .nav-search{display:flex;align-items:center;gap:8px;margin:4px 6px 10px;padding:8px 11px;background:var(--bg2);
   border:1px solid var(--stroke2);border-radius:11px;color:var(--txt-mute);font-size:13px}
@@ -109,7 +113,7 @@ body{
   color:var(--txt-dim);font-size:13px;font-weight:500;transition:.16s;border:1px solid transparent;margin:1px 0;position:relative}
 .nav-item .ic{width:17px;text-align:center;font-size:14px;opacity:.85;flex-shrink:0}
 .nav-item:hover{background:var(--stroke);color:var(--txt);transform:translateX(2px)}
-.nav-item.active{background:var(--grad);color:#fff;box-shadow:0 5px 15px rgba(91,140,255,.38);border-color:transparent;font-weight:600}
+.nav-item.active{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(18,201,140,.35);border-color:transparent;font-weight:650}
 .nav-item.active .ic{opacity:1}
 .nav-item.hidden{display:none}
 .nav-grp.filtered .nav-gbody{max-height:400px;opacity:1}
@@ -120,11 +124,14 @@ body{
 .topbar h2{font-size:24px;font-weight:800;letter-spacing:-.5px}
 .topbar .sub{font-size:12.5px;color:var(--txt-dim);margin-top:2px}
 .spacer{flex:1}
-.pill{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:11px;
-  background:var(--panel);border:1px solid var(--stroke);backdrop-filter:var(--blur);
-  color:var(--txt);font-size:12.5px;font-weight:600;cursor:pointer;transition:.16s}
-.pill:hover{border-color:var(--stroke2);transform:translateY(-1px)}
-.pill.accent{background:var(--grad);border:none;color:#fff;box-shadow:0 6px 16px rgba(91,140,255,.4)}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:999px;
+  background:var(--panel);border:1px solid var(--stroke2);
+  color:var(--txt);font-size:12.5px;font-weight:600;cursor:pointer;transition:.16s;box-shadow:0 2px 8px rgba(40,60,100,.05)}
+.pill:hover{border-color:var(--stroke2);transform:translateY(-1px);background:var(--panel-solid)}
+.pill:active{transform:translateY(0) scale(.97)}
+.pill.accent{background:var(--grad);border:none;color:#fff;box-shadow:0 8px 20px rgba(18,201,140,.4)}
+.pill.accent:hover{background:var(--grad);filter:brightness(1.08)}
+.pill.icon-only{padding:8px 10px;justify-content:center;min-width:36px;font-size:14px}
 select.month-sel{background:var(--panel-solid);color:var(--txt);border:1px solid var(--stroke2);
   padding:8px 12px;border-radius:11px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font)}
 
@@ -135,25 +142,33 @@ select.month-sel{background:var(--panel-solid);color:var(--txt);border:1px solid
 .g-3{grid-template-columns:repeat(3,1fr)}
 .g-2e{grid-template-columns:1fr 1fr}
 .card{background:var(--panel);border:1px solid var(--stroke);border-radius:var(--radius);
-  padding:18px;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
-  box-shadow:var(--shadow);position:relative;overflow:hidden}
-.card h3{font-size:14px;font-weight:700;letter-spacing:-.2px;display:flex;align-items:center;gap:8px;margin-bottom:2px}
+  padding:20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card{transition:transform .2s,border-color .2s,box-shadow .2s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h3{font-size:14px;font-weight:750;letter-spacing:-.2px;display:flex;align-items:center;gap:8px;margin-bottom:2px}
 .card .caption{font-size:11.5px;color:var(--txt-dim);margin-bottom:14px}
 .card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap}
 .card-head h3{margin:0}
 
 .kpi{background:var(--panel);border:1px solid var(--stroke);border-radius:var(--radius);
-  padding:17px 18px;backdrop-filter:var(--blur);box-shadow:var(--shadow);position:relative;overflow:hidden;
-  transition:.25s}
-.kpi:hover{transform:translateY(-3px);border-color:var(--stroke2);box-shadow:0 16px 40px rgba(0,0,0,.4)}
-.kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent-glow,var(--grad));opacity:.85}
-.kpi::after{content:"";position:absolute;inset:0;background:var(--accent-glow,transparent);opacity:.10;pointer-events:none}
-.kpi .label{font-size:11.5px;color:var(--txt-dim);font-weight:600;letter-spacing:.3px;display:flex;align-items:center;gap:7px}
-.kpi .val{font-size:27px;font-weight:800;margin:9px 0 4px;letter-spacing:-.8px;font-variant-numeric:tabular-nums}
-.kpi .delta{font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:4px}
-.kpi .ic-badge{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:15px;
-  position:absolute;top:16px;right:16px;background:var(--stroke)}
+  padding:19px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:.22s}
+.kpi:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent-glow,var(--accent));opacity:.9}
+.kpi::after{content:"";position:absolute;top:-40%;right:-30%;width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,var(--accent-glow,transparent),transparent 70%);opacity:.14;pointer-events:none}
+.kpi .label{font-size:11px;color:var(--txt-dim);font-weight:600;letter-spacing:.4px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.kpi .val{font-size:29px;font-weight:800;margin:12px 0 5px;letter-spacing:-1px;font-variant-numeric:tabular-nums;line-height:1.05}
+.kpi .delta{font-size:11.5px;font-weight:700;display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:20px}
+.kpi .delta.up{background:rgba(47,214,138,.14)} .kpi .delta.down{background:rgba(255,107,107,.14)}
+.kpi .ic-badge{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:15px;
+  position:absolute;top:15px;right:15px;background:color-mix(in srgb,var(--accent-glow,var(--accent)) 20%,transparent);
+  color:var(--accent-glow,var(--accent))}
 .up{color:var(--green)} .down{color:var(--red)} .flat{color:var(--txt-dim)}
+.kpi.hero{background:var(--charcoal);color:#fff;border:none}
+.kpi.hero .label{color:rgba(255,255,255,.6)}
+.kpi.hero .val{color:#fff}
+.kpi.hero::after{background:radial-gradient(circle,rgba(26,211,154,.5),transparent 70%);opacity:.5}
+.kpi.hero .ic-badge{background:rgba(255,255,255,.12);color:#fff}
 
 .chart-wrap{position:relative;width:100%}
 canvas{max-width:100%}
@@ -161,15 +176,17 @@ canvas{max-width:100%}
 /* ============ TABLES ============ */
 .tbl-wrap{overflow-x:auto;border-radius:12px}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
-th{text-align:left;padding:10px 12px;color:var(--txt-dim);font-weight:600;font-size:11px;
-  text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid var(--stroke2);position:sticky;top:0;
+th{text-align:left;padding:11px 13px;color:var(--txt-mute);font-weight:700;font-size:10.5px;
+  text-transform:uppercase;letter-spacing:.7px;border-bottom:1px solid var(--stroke);position:sticky;top:0;
   background:var(--panel-solid)}
-td{padding:11px 12px;border-bottom:1px solid var(--stroke)}
-tr:hover td{background:var(--stroke)}
+td{padding:12px 13px;border-bottom:1px solid var(--stroke)}
+tbody tr{transition:background .12s}
+tbody tr:hover td{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+td.mono,th{font-variant-numeric:tabular-nums}
 .tag{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700}
 .tag.income{background:rgba(47,214,138,.15);color:var(--green)}
 .tag.expense{background:rgba(255,107,107,.15);color:var(--red)}
-.tag.transfer{background:rgba(91,140,255,.15);color:var(--accent)}
+.tag.transfer{background:rgba(18,207,143,.15);color:var(--accent)}
 .tag.valuation{background:rgba(224,179,77,.16);color:var(--gold)}
 .row-actions button{background:transparent;border:none;color:var(--txt-mute);cursor:pointer;font-size:14px;padding:3px 5px;border-radius:6px}
 .row-actions button:hover{color:var(--red);background:var(--stroke)}
@@ -187,37 +204,51 @@ tr:hover td{background:var(--stroke)}
 .field{margin-bottom:15px}
 .field label{display:block;font-size:11.5px;color:var(--txt-dim);font-weight:600;margin-bottom:6px}
 .field input,.field select,.field textarea{width:100%;background:var(--bg2);border:1px solid var(--stroke2);
-  border-radius:11px;padding:11px 13px;color:var(--txt);font-size:13.5px;font-family:var(--font);transition:.15s}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,140,255,.18)}
+  border-radius:14px;padding:13px 15px;color:var(--txt);font-size:14px;font-family:var(--font);transition:.15s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(18,201,140,.16);background:var(--panel)}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.btn{padding:11px 18px;border-radius:11px;border:none;font-size:13.5px;font-weight:700;cursor:pointer;font-family:var(--font);transition:.16s}
-.btn.primary{background:var(--grad);color:#fff;box-shadow:0 6px 16px rgba(91,140,255,.4);width:100%}
-.btn.primary:hover{filter:brightness(1.08)}
-.btn.ghost{background:var(--stroke);color:var(--txt)}
+.btn{padding:14px 22px;border-radius:999px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font);transition:.18s;letter-spacing:.2px}
+.btn.primary{background:var(--grad);color:#fff;box-shadow:0 10px 24px rgba(18,201,140,.35);width:100%}
+.btn.primary:hover{filter:brightness(1.05);transform:translateY(-1px);box-shadow:0 14px 30px rgba(18,201,140,.42)}
+.btn.primary:active{transform:translateY(0) scale(.99)}
+.btn.ghost{background:var(--bg2);color:var(--txt);border:1px solid var(--stroke2)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
 
 /* ============ MISC ============ */
 .section{display:none;animation:fade .4s ease}
 .section.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.section.active .card,.section.active .kpi{animation:rise .45s ease backwards}
+.section.active .kpi:nth-child(2){animation-delay:.04s}
+.section.active .kpi:nth-child(3){animation-delay:.08s}
+.section.active .kpi:nth-child(4){animation-delay:.12s}
+.section.active .kpi:nth-child(5){animation-delay:.16s}
+.section.active .kpi:nth-child(6){animation-delay:.20s}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.section,.section.active .card,.section.active .kpi{animation:none}}
 .legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
 .legend .li{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--txt-dim)}
 .legend .dot{width:10px;height:10px;border-radius:3px}
 .bar-mini{height:7px;border-radius:20px;background:var(--stroke);overflow:hidden}
 .bar-mini > i{display:block;height:100%;border-radius:20px;background:var(--grad)}
-.empty{text-align:center;padding:40px 20px;color:var(--txt-mute);font-size:13px}
-.empty .big{font-size:38px;margin-bottom:10px;opacity:.5}
+.empty{text-align:center;padding:38px 22px;color:var(--txt-mute);font-size:13px;
+  border:1.5px dashed var(--stroke2);border-radius:16px;background:var(--bg2)}
+.empty .big{font-size:40px;margin-bottom:12px;opacity:.55;display:block}
 .search-box{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--stroke2);
   border-radius:11px;padding:9px 13px;min-width:220px}
 .search-box input{background:transparent;border:none;color:var(--txt);font-size:13px;width:100%;outline:none;font-family:var(--font)}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{padding:6px 12px;border-radius:20px;border:1px solid var(--stroke2);background:var(--panel);
   font-size:11.5px;font-weight:600;cursor:pointer;color:var(--txt-dim);transition:.15s}
-.chip.on{background:var(--grad);color:#fff;border-color:transparent}
+.chip.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(18,207,143,.35)}
+.chip:hover:not(.on){border-color:var(--accent);color:var(--txt)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);z-index:200;
   background:var(--panel-solid);border:1px solid var(--stroke2);padding:13px 20px;border-radius:13px;
   font-size:13px;font-weight:600;box-shadow:0 16px 40px rgba(0,0,0,.4);opacity:0;transition:.35s;display:flex;align-items:center;gap:10px}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.svg-chart{width:100%;overflow:visible}
+.svg-chart{width:100%;height:auto;display:block}
+.seg{transition:opacity .15s,transform .15s;transform-origin:center}
+.seg:hover{opacity:1!important;filter:brightness(1.12)}
 .fund-badge{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:7px;vertical-align:middle}
 .progress-ring{transform:rotate(-90deg)}
 .mono{font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1;letter-spacing:-.2px}
@@ -336,12 +367,12 @@ tr:hover td{background:var(--stroke)}
     <div class="spacer"></div>
     <select class="month-sel" id="monthSelect" onchange="App.setMonth(this.value)"></select>
     <div class="pill" onclick="App.toggleTheme()" title="Toggle theme"><span id="themeIcon">◐</span></div>
-    <div class="pill" onclick="App.exportData()" title="Export backup">⭳ Export</div>
-    <div class="pill" onclick="App.copyData()" title="Copy all data to clipboard">⧉ Copy</div>
-    <div class="pill" onclick="App.pasteImport()" title="Paste data from another device">⎘ Paste</div>
-    <div class="pill" onclick="document.getElementById('importFile').click()" title="Import backup">⭱ Import</div>
+    <div class="pill" id="cloudBadge" onclick="App.cloudSettings()" title="Google Drive sync" style="display:none">☁ sync</div>
+    <div class="pill" id="backupBadge" onclick="App.backupCenter()" title="Backup & restore">⭳ backup</div>
+    <div class="pill icon-only" onclick="App.copyData()" title="Copy all data to clipboard">⧉</div>
+    <div class="pill icon-only" onclick="App.pasteImport()" title="Paste data from another device">⎘</div>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="App.importData(event)">
-    <div class="pill" onclick="window.print()">⎙ Print</div>
+    <div class="pill icon-only" onclick="window.print()" title="Print">⎙</div>
     <div class="pill accent" onclick="App.quickAdd()">＋ Add Entry</div>
   </div>
 
@@ -410,11 +441,11 @@ tr:hover td{background:var(--stroke)}
    ===================================================================== */
 const CUR = "৳"; // change currency symbol here
 const FUND_TYPES = {
-  bank:      {label:"Bank Account",       color:"#5b8cff", invest:false},
+  bank:      {label:"Bank Account",       color:"#12cf8f", invest:false},
   cash:      {label:"Cash Reserve",       color:"#2fd68a", invest:false},
   fd:        {label:"Fixed Deposit",      color:"#e0b34d", invest:true},
   dps:       {label:"DPS",                color:"#3ad0e0", invest:true},
-  mutual:    {label:"Mutual Fund",        color:"#7c5cff", invest:true},
+  mutual:    {label:"Mutual Fund",        color:"#0bbf9a", invest:true},
   stock:     {label:"Stocks",             color:"#ff6b6b", invest:true},
   savingcert:{label:"Savings Certificate",color:"#ffb454", invest:true},
   other:     {label:"Other Investment",   color:"#a0b0c8", invest:true},
@@ -427,7 +458,7 @@ const FUND_TYPES = {
 };
 const INCOME_CATS  = ["Salary","Business","Freelance","Dividend","Interest","Rental","Gift","Bonus","Refund","Other"];
 const EXPENSE_CATS = ["Housing","Food","Transport","Utilities","Health","Education","Shopping","Entertainment","Insurance","Loan/EMI","Family","Travel","Charity","Fees","Other"];
-const PALETTE = ["#5b8cff","#7c5cff","#2fd68a","#e0b34d","#3ad0e0","#ff6b6b","#ffb454","#a78bfa","#34d399","#f472b6","#60a5fa","#fbbf24"];
+const PALETTE = ["#12cf8f","#0bbf9a","#2fd68a","#e0b34d","#3ad0e0","#ff6b6b","#ffb454","#a78bfa","#34d399","#f472b6","#60a5fa","#fbbf24"];
 
 const uid = () => Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const fmt = (n,dec=0)=>{ if(n===null||n===undefined||isNaN(n)) n=0;
@@ -494,7 +525,7 @@ function seed(){
     snapshots:{},
     assump:{ inflation:9.5, fiYear:2040, monthlyContrib:32000, swr:4, dsexStart:5200, dsexNow:5200,
       target:{bank:5,cash:2,fd:30,dps:10,mutual:10,stock:25,savingcert:15,other:3} },
-    settings:{theme:"dark", startNetWorth:0},
+    settings:{theme:"light", startNetWorth:0},
   };
 }
 
@@ -857,18 +888,24 @@ const App = {
     this.ensureCats();
     this.ensureInv();
     this.syncAuto();
-    document.documentElement.setAttribute('data-theme', this.data.settings.theme||'dark');
-    document.getElementById('themeIcon').textContent = (this.data.settings.theme==='light')?'◑':'◐';
+    document.documentElement.setAttribute('data-theme', this.data.settings.theme||'light');
+    {var _ti=document.getElementById('themeIcon'); if(_ti) _ti.textContent=((this.data.settings.theme||'light')==='light')?'◐':'◑';}
     const withData = Calc.allMonths().filter(m=>Calc.monthTxns(m).length);
     this.month = withData.slice(-1)[0] || Calc.allMonths().slice(-1)[0];
     this.ensurePeriod();
     this.buildMonthSelect();
+    this.autoHistDaily();
+    setTimeout(()=>{ this.renderBackupBadge(); this.renderCloudBadge();
+      if(this.cloudCfg().clientId && this.cloudCfg().autoSync) this.cloudConnect(false);
+      const age=this.backupAgeDays();
+      if(age===null||age>=7) this.toast('\u26a0 '+this.backupAgeLabel()+' \u2014 tap \u2b73 backup to save a file');
+    },600);
     document.querySelectorAll('.nav-item').forEach(n=>n.onclick=()=>this.nav(n.dataset.sec, n));
     document.querySelectorAll('.botnav-item').forEach(n=>n.onclick=()=>this.nav(n.dataset.sec));
     this.restoreNav();
     this.renderAll();
   },
-  persist(){ Store.save(this.data); },
+  persist(){ this.data.updatedAt=new Date().toISOString(); Store.save(this.data); this.cloudAutoPush(); },
 
   buildMonthSelect(){
     const sel=document.getElementById('monthSelect'); const months=Calc.allMonths();
@@ -941,16 +978,66 @@ const App = {
   },
 
   toggleTheme(){
-    const t = this.data.settings.theme==='light'?'dark':'light';
+    const t = (this.data.settings.theme||'light')==='light'?'dark':'light';
     this.data.settings.theme=t; document.documentElement.setAttribute('data-theme',t);
-    document.getElementById('themeIcon').textContent = t==='light'?'◑':'◐';
+    var ti=document.getElementById('themeIcon'); if(ti) ti.textContent = t==='light'?'◐':'◑';
     this.persist(); this.renderAll();
   },
   toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
     clearTimeout(this._tt); this._tt=setTimeout(()=>t.classList.remove('show'),2600); },
 
   /* ---------- MODAL ---------- */
+  categoryDetail(enc, type){
+    const cat=decodeURIComponent(enc);
+    const months=this.periodMonths();
+    const all=this.pTxns().filter(x=>x.type===type && x.category===cat).sort((a,b)=>b.date.localeCompare(a.date));
+    const total=all.reduce((s,x)=>s+x.amount,0);
+    const series=months.map(m=>this.data.txns.filter(x=>x.type===type&&x.category===cat&&monthKey(x.date)===m).reduce((s,x)=>s+x.amount,0));
+    const rows=all.slice(0,20).map(x=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--stroke)">
+        <div><div style="font-size:12.5px;font-weight:600">${x.note||cat}</div><div style="font-size:10.5px;color:var(--txt-mute)">${x.date} \u00b7 ${this.fundName(x.fundId)}</div></div>
+        <div class="mono ${type==='income'?'pos':'neg'}" style="font-weight:700">${type==='income'?'+':'-'}${fmt(x.amount)}</div></div>`).join('')||'<div class="empty" style="padding:16px">No entries in this period</div>';
+    const body=`<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10px">
+        <div><div class="caption">${type==='income'?'INCOME':'SPENT'} \u00b7 ${this.periodLabel()}</div>
+          <div style="font-size:26px;font-weight:800" class="mono ${type==='income'?'pos':'neg'}">${fmt(total)}</div></div>
+        <div style="text-align:right"><div class="caption">ENTRIES</div><div class="mono" style="font-weight:700">${all.length}</div>
+          <div class="caption" style="margin-top:2px">AVG/MO</div><div class="mono">${fmt(months.length?total/months.length:0)}</div></div></div>
+      ${series.some(v=>v>0)?`<div class="caption" style="margin-bottom:4px">MONTHLY TREND</div><div style="height:120px;margin-bottom:10px"><canvas id="cdChart"></canvas></div>`:''}
+      <div class="caption" style="margin-bottom:2px">ENTRIES</div>
+      <div style="max-height:280px;overflow-y:auto">${rows}</div>`;
+    this.openModal(cat, body);
+    if(series.some(v=>v>0)) setTimeout(()=>{ this.chart('cdChart',{type:'bar',
+      data:{labels:months.map(monthLabel),datasets:[{data:series,backgroundColor:this.css(type==='income'?'--green':'--red'),borderRadius:6}]},
+      options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>CUR+(v/1000).toFixed(0)+'k'}}}}}); },60);
+  },
+  expenseCat(enc){ this.categoryDetail(enc,'expense'); },
+  incomeCat(enc){ this.categoryDetail(enc,'income'); },
+  sectorDrill(enc){
+    const sec=decodeURIComponent(enc); this.ensureInv();
+    const hs=this.data.holdings.map(h=>({h,m:Inv.stock(h)})).filter(x=>x.m.qty>0 && (x.h.sector||'Misc')===sec);
+    const mv=hs.reduce((s,x)=>s+x.m.mv,0);
+    const rows=hs.sort((a,b)=>b.m.mv-a.m.mv).map(x=>`<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--stroke)">
+        <div><div style="font-size:13px;font-weight:700">${x.h.ticker}</div><div style="font-size:10.5px;color:var(--txt-mute)">${x.m.qty} sh \u00b7 avg ${x.m.avg.toFixed(2)}</div></div>
+        <div style="text-align:right"><div class="mono" style="font-weight:700">${fmt(x.m.mv)}</div>
+          <div class="mono ${x.m.pl>=0?'pos':'neg'}" style="font-size:11px">${retPct(x.m.cost,x.m.totalRet)}</div></div></div>`).join('');
+    const body=`<div style="margin-bottom:10px"><div class="caption">${sec.toUpperCase()} \u00b7 MARKET VALUE</div>
+        <div style="font-size:26px;font-weight:800" class="mono">${fmt(mv)}</div>
+        <div class="caption">${hs.length} holding${hs.length===1?'':'s'}</div></div>${rows}`;
+    this.openModal(sec+' \u2014 Sector', body);
+  },
+  typeDrill(enc){
+    const tp=decodeURIComponent(enc);
+    const funds=this.data.funds.filter(f=>f.type===tp);
+    const tot=funds.reduce((s,f)=>s+Calc.fundValue(f.id),0);
+    const rows=funds.sort((a,b)=>Calc.fundValue(b.id)-Calc.fundValue(a.id)).map(f=>`<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--stroke);cursor:pointer" onclick="App.closeModal();App.fundDetail('${f.id}')">
+        <div style="font-size:13px;font-weight:600">${f.name} <span style="color:var(--txt-mute);font-size:11px">\u203a</span></div>
+        <div class="mono" style="font-weight:700">${fmt(Calc.fundValue(f.id))}</div></div>`).join('');
+    const body=`<div style="margin-bottom:10px"><div class="caption">${FUND_TYPES[tp].label.toUpperCase()} \u00b7 TOTAL</div>
+        <div style="font-size:26px;font-weight:800" class="mono">${fmt(tot)}</div>
+        <div class="caption">${funds.length} account${funds.length===1?'':'s'} \u00b7 tap one to drill in</div></div>${rows}`;
+    this.openModal(FUND_TYPES[tp].label, body);
+  },
   fundDetail(fid){
+    fid=/%|[A-Z]/.test(fid)&&!Calc.fundById(fid)?decodeURIComponent(fid):fid;
     const f=Calc.fundById(fid); if(!f) return;
     this.ensureInv();
     const isCard=f.type==='credit';
@@ -1273,16 +1360,238 @@ const App = {
   saveBudget(cat,val){ this.data.budgets[cat]=parseFloat(val||0); this.persist(); },
 
   /* ---------- EXPORT / IMPORT ---------- */
+  /* ---------- GOOGLE DRIVE CLOUD SYNC (optional, appDataFolder) ---------- */
+  cloudCfg(){ try{ return JSON.parse(localStorage.getItem('atlas_cloud')||'{}'); }catch(e){ return {}; } },
+  cloudSet(patch){ const c=Object.assign(this.cloudCfg(),patch); localStorage.setItem('atlas_cloud',JSON.stringify(c)); return c; },
+  cloudConnected(){ return !!this._gToken; },
+  DRIVE_FILE:'atlas-data.json',
+  loadGIS(cb){
+    if(window.google && google.accounts && google.accounts.oauth2){ cb(); return; }
+    const s=document.createElement('script'); s.src='https://accounts.google.com/gsi/client'; s.async=true;
+    s.onload=()=>cb(); s.onerror=()=>this.toast('\u26a0 Couldn\'t load Google \u2014 are you online?');
+    document.head.appendChild(s);
+  },
+  cloudConnect(interactive){
+    const cid=(this.cloudCfg().clientId||'').trim();
+    if(!cid){ this.toast('\u26a0 Add your Google Client ID first'); this.cloudSettings(); return; }
+    this.loadGIS(()=>{
+      try{
+        this._gTokClient=google.accounts.oauth2.initTokenClient({
+          client_id:cid, scope:'https://www.googleapis.com/auth/drive.appdata',
+          callback:(resp)=>{ if(resp && resp.access_token){ this._gToken=resp.access_token;
+            this.toast('\u2713 Connected to Google Drive'); this.renderCloudBadge();
+            this.cloudPullThenReconcile(); } else { this.toast('\u26a0 Google sign-in did not complete'); } }
+        });
+        this._gTokClient.requestAccessToken({prompt: interactive?'consent':''});
+      }catch(e){ this.toast('\u26a0 Google sign-in error \u2014 check the Client ID and authorized origin'); }
+    });
+  },
+  cloudApi(url,opts){ opts=opts||{}; opts.headers=Object.assign({Authorization:'Bearer '+this._gToken},opts.headers||{});
+    return fetch(url,opts).then(r=>{ if(r.status===401){ this._gToken=null; this.renderCloudBadge(); throw new Error('auth expired'); } return r; }); },
+  cloudFindFile(){
+    const q=encodeURIComponent("name='"+this.DRIVE_FILE+"'");
+    return this.cloudApi('https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&fields=files(id,name,modifiedTime)&q='+q)
+      .then(r=>r.json()).then(j=>(j.files&&j.files[0])||null);
+  },
+  cloudPush(silent){
+    if(!this._gToken){ if(!silent) this.toast('\u26a0 Connect Google Drive first'); return Promise.resolve(); }
+    const payload=JSON.stringify(this.data);
+    const doUpload=(fileId)=>{
+      if(fileId){
+        return this.cloudApi('https://www.googleapis.com/upload/drive/v3/files/'+fileId+'?uploadType=media',
+          {method:'PATCH',headers:{'Content-Type':'application/json'},body:payload});
+      } else {
+        const boundary='atlas'+Date.now();
+        const meta={name:this.DRIVE_FILE,parents:['appDataFolder']};
+        const body='--'+boundary+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify(meta)+
+          '\r\n--'+boundary+'\r\nContent-Type: application/json\r\n\r\n'+payload+'\r\n--'+boundary+'--';
+        return this.cloudApi('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',
+          {method:'POST',headers:{'Content-Type':'multipart/related; boundary='+boundary},body})
+          .then(r=>r.json()).then(j=>{ if(j.id) this.cloudSet({fileId:j.id}); return j; });
+      }
+    };
+    const fid=this.cloudCfg().fileId;
+    return (fid?doUpload(fid):this.cloudFindFile().then(f=>doUpload(f?f.id:null)))
+      .then(()=>{ this.cloudSet({lastSync:new Date().toISOString(), lastSyncUpdatedAt:this.data.updatedAt});
+        this.renderCloudBadge(); if(!silent) this.toast('\u2713 Saved to Google Drive'); })
+      .catch(e=>{ if(!silent) this.toast('\u26a0 Cloud save failed: '+e.message); });
+  },
+  cloudPull(){
+    return this.cloudFindFile().then(f=>{ if(!f) return null; this.cloudSet({fileId:f.id});
+      return this.cloudApi('https://www.googleapis.com/drive/v3/files/'+f.id+'?alt=media').then(r=>r.text())
+        .then(t=>{ try{ return JSON.parse(t); }catch(e){ return null; } }); });
+  },
+  // decide safely which side is newer; never auto-clobber a newer remote
+  syncDecision(localU, remoteU){
+    if(!remoteU) return 'push';           // nothing in cloud yet
+    if(!localU) return 'pull';            // no local stamp
+    if(localU===remoteU) return 'same';
+    return localU>remoteU ? 'push-newer' : 'pull-newer';
+  },
+  cloudPullThenReconcile(){
+    this.cloudPull().then(remote=>{
+      if(!remote){ this.cloudPush(true); return; }              // first ever push
+      const dec=this.syncDecision(this.data.updatedAt, remote.updatedAt);
+      if(dec==='same'){ this.cloudSet({lastSync:new Date().toISOString()}); this.renderCloudBadge(); return; }
+      if(dec==='push'||dec==='push-newer'){
+        // local is newer or equal-basis; push quietly unless remote was newer
+        if(dec==='push-newer'){ /* remote older, safe */ } this.cloudPush(true); return;
+      }
+      // remote is newer -> ask before replacing local
+      const rd=new Date(remote.updatedAt).toLocaleString();
+      const body=`<p class="hint" style="margin:0 0 12px">Your Google Drive has a <b>newer</b> copy (saved ${rd}) than this device. This usually means you edited on another device.</p>
+        <div style="background:var(--bg2);border-radius:12px;padding:12px;margin-bottom:14px;font-size:12.5px">
+          <div>Cloud copy: <b>${(remote.funds||[]).length} accounts \u00b7 ${(remote.txns||[]).length} entries</b></div>
+          <div>This device: <b>${this.data.funds.length} accounts \u00b7 ${this.data.txns.length} entries</b></div></div>
+        <button class="btn primary" style="width:100%;margin-bottom:8px" onclick="App.cloudApply(true)">Use the cloud copy (recommended)</button>
+        <button class="btn ghost" style="width:100%" onclick="App.cloudApply(false)">Keep this device &amp; overwrite cloud</button>`;
+      this._pendingRemote=remote; this.openModal('\u2601 Sync conflict', body);
+    }).catch(e=>{ /* offline or auth issue: stay local */ });
+  },
+  cloudApply(useRemote){
+    if(useRemote && this._pendingRemote){ this.histPush('before-cloud-pull');
+      this.data=this._pendingRemote; if(!this.data.snapshots)this.data.snapshots={};
+      this.month=Calc.allMonths().slice(-1)[0]; Store.save(this.data);
+      this.cloudSet({lastSync:new Date().toISOString(), lastSyncUpdatedAt:this.data.updatedAt});
+      this.closeModal(); this.renderAll(); this.toast('\u2713 Loaded latest from Google Drive');
+    } else { this.closeModal(); this.cloudPush(); }
+    this._pendingRemote=null;
+  },
+  _cloudTimer:null,
+  cloudAutoPush(){
+    if(!this._gToken || !this.cloudCfg().autoSync) return;
+    clearTimeout(this._cloudTimer);
+    this._cloudTimer=setTimeout(()=>this.cloudPush(true), 2500);   // debounce bursts of edits
+  },
+  cloudDisconnect(){ this._gToken=null; this.renderCloudBadge(); this.toast('Disconnected (data stays on this device)'); },
+  renderCloudBadge(){
+    const el=document.getElementById('cloudBadge'); if(!el) return;
+    const c=this.cloudCfg();
+    if(!c.clientId){ el.style.display='none'; return; } el.style.display='';
+    const on=this.cloudConnected();
+    const col=on?'var(--green)':'var(--txt-mute)';
+    el.innerHTML=`<span style="width:8px;height:8px;border-radius:50%;background:${col};display:inline-block"></span> ${on?'synced':'sync'}`;
+    el.title=on?('Google Drive connected \u2014 last sync '+(c.lastSync?new Date(c.lastSync).toLocaleString():'\u2014')):'Tap to connect Google Drive';
+  },
+  cloudSettings(){
+    const c=this.cloudCfg();
+    const origin=(typeof location!=='undefined'&&location.origin&&location.origin!=='null')?location.origin:'(open the hosted URL, not the file)';
+    const body=`<p class="hint" style="margin:0 0 12px">Sync your data to your own Google Drive so every device shows the same numbers. Your data goes only to <b>your</b> Drive (a private app folder) \u2014 nowhere else.</p>
+      <div class="field"><label>Google OAuth Client ID</label>
+        <input id="cl_cid" value="${c.clientId||''}" placeholder="xxxxxxxx.apps.googleusercontent.com">
+        <div class="hint">One-time setup in Google Cloud Console. Paste the Client ID here.</div></div>
+      <div class="field"><label>Auto-sync while the app is open</label>
+        <select id="cl_auto"><option value="1" ${c.autoSync?'selected':''}>On \u2014 save changes to Drive automatically</option>
+          <option value="0" ${!c.autoSync?'selected':''}>Off \u2014 I'll sync manually</option></select></div>
+      <div style="background:var(--bg2);border-radius:12px;padding:12px;margin:6px 0 14px;font-size:12px">
+        <div class="caption" style="margin-bottom:4px">ADD THIS AS AN AUTHORIZED JAVASCRIPT ORIGIN</div>
+        <code style="color:var(--accent);word-break:break-all">${origin}</code></div>
+      <button class="btn primary" style="width:100%;margin-bottom:8px" onclick="App.cloudSaveSettings()">Save &amp; Connect</button>
+      ${this.cloudConnected()?`<div style="display:flex;gap:8px">
+        <button class="btn ghost" style="flex:1" onclick="App.cloudPush()">\u2601\u2191 Save now</button>
+        <button class="btn ghost" style="flex:1" onclick="App.cloudPullThenReconcile()">\u2601\u2193 Load now</button>
+        <button class="btn ghost" style="flex:1" onclick="App.cloudDisconnect()">Disconnect</button></div>`:''}
+      <p class="hint" style="margin-top:12px">Need the Client ID? Ask me for the step-by-step Google Cloud setup.</p>`;
+    this.openModal('\u2601 Google Drive Sync', body);
+  },
+  cloudSaveSettings(){
+    const cid=document.getElementById('cl_cid').value.trim();
+    const auto=document.getElementById('cl_auto').value==='1';
+    this.cloudSet({clientId:cid, autoSync:auto});
+    this.closeModal(); this.renderCloudBadge();
+    if(cid) this.cloudConnect(true);
+  },
+
+  /* ---------- BACKUP & RESTORE SAFETY NET ---------- */
+  HIST_KEY:'atlas_pf_history',
+  lastBackup(){ try{ return localStorage.getItem('atlas_pf_lastbackup')||''; }catch(e){ return ''; } },
+  setLastBackup(){ try{ localStorage.setItem('atlas_pf_lastbackup', new Date().toISOString()); }catch(e){} },
+  backupAgeDays(){ const b=this.lastBackup(); if(!b) return null;
+    return Math.floor((Date.now()-new Date(b))/864e5); },
+  backupAgeLabel(){ const d=this.backupAgeDays();
+    if(d===null) return 'never backed up';
+    if(d===0) return 'backed up today';
+    if(d===1) return 'backed up yesterday';
+    return 'backed up '+d+'d ago'; },
+  // rolling local snapshots so a bad paste/edit is recoverable even without a file
+  histList(){ try{ return JSON.parse(localStorage.getItem(this.HIST_KEY)||'[]'); }catch(e){ return []; } },
+  histPush(reason){
+    try{
+      const list=this.histList();
+      const snap={at:new Date().toISOString(), reason:reason||'auto',
+        nw:Calc.totalNetWorth(), funds:this.data.funds.length, txns:this.data.txns.length,
+        data:JSON.stringify(this.data)};
+      // de-dupe: skip if identical to the most recent
+      if(list.length && list[0].data===snap.data) return;
+      list.unshift(snap);
+      while(list.length>8) list.pop();          // keep last 8
+      localStorage.setItem(this.HIST_KEY, JSON.stringify(list));
+    }catch(e){}
+  },
+  autoHistDaily(){
+    const list=this.histList();
+    const today=todayStr();
+    const hasToday=list.some(s=>s.at.slice(0,10)===today && s.reason==='daily');
+    if(!hasToday) this.histPush('daily');
+  },
+  stamp(){ const d=new Date(); return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0'); },
   exportData(){
     const blob=new Blob([JSON.stringify(this.data,null,2)],{type:'application/json'});
     const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-    a.download='atlas-finance-'+todayStr()+'.json'; a.click(); this.toast('✓ Backup exported');
+    a.download='atlas-backup-'+this.stamp()+'.json'; a.click();
+    this.histPush('manual'); this.setLastBackup();
+    this.toast('✓ Backup saved — check your Files/Downloads');
+    setTimeout(()=>this.renderBackupBadge(),100);
+  },
+  backupCenter(){
+    const list=this.histList();
+    const age=this.backupAgeDays();
+    const ageCol= age===null||age>=7?'var(--red)':age>=3?'var(--amber)':'var(--green)';
+    const hrows=list.map((s,i)=>{
+      const dt=new Date(s.at); const when=dt.toLocaleDateString()+' '+dt.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--stroke)">
+        <div><div style="font-size:12.5px;font-weight:600">${when} <span class="tag" style="font-size:9px;background:var(--stroke);color:var(--txt-mute)">${s.reason}</span></div>
+          <div style="font-size:10.5px;color:var(--txt-mute)">Net worth ${fmt(s.nw)} \u00b7 ${s.funds} accounts \u00b7 ${s.txns} entries</div></div>
+        <button class="btn ghost" style="padding:6px 12px;font-size:12px" onclick="App.histRestore(${i})">Restore</button></div>`;
+    }).join('')||'<div class="empty" style="padding:16px">No local snapshots yet</div>';
+    const body=`<div style="background:var(--bg2);border-radius:12px;padding:13px;margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="width:9px;height:9px;border-radius:50%;background:${ageCol}"></span>
+          <b style="font-size:13.5px">${this.backupAgeLabel()}</b></div>
+        <p class="hint" style="margin:8px 0 0">Your data lives only in this browser. Download a file regularly so you never lose it \u2014 and keep one in iCloud/Files for safety.</p></div>
+      <button class="btn primary" style="width:100%;margin-bottom:8px" onclick="App.exportData()">\u2b73 Download backup file now</button>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <button class="btn ghost" style="flex:1" onclick="App.copyData()">\u29c9 Copy</button>
+        <button class="btn ghost" style="flex:1" onclick="document.getElementById('importFile').click()">\u2b71 Import file</button>
+      </div>
+      <div class="caption" style="margin-bottom:4px">RECOVERY POINTS (on this device)</div>
+      <p class="hint" style="margin:0 0 8px">Automatic local snapshots \u2014 restore if an edit or paste goes wrong.</p>
+      <div style="max-height:260px;overflow-y:auto">${hrows}</div>`;
+    this.openModal('\u2b73 Backup & Restore', body);
+  },
+  histRestore(i){
+    const list=this.histList(); const s=list[i]; if(!s) return;
+    if(!confirm('Restore the snapshot from '+new Date(s.at).toLocaleString()+'?\n\nThis replaces your current data. A snapshot of the current state is saved first, so you can undo.')) return;
+    this.histPush('before-restore');
+    try{ this.data=JSON.parse(s.data); if(!this.data.snapshots)this.data.snapshots={};
+      this.month=Calc.allMonths().slice(-1)[0]; this.persist(); this.closeModal(); this.renderAll();
+      this.toast('\u2713 Restored snapshot from '+new Date(s.at).toLocaleDateString()); }
+    catch(e){ this.toast('\u26a0 Could not restore that snapshot'); }
+  },
+  renderBackupBadge(){
+    const el=document.getElementById('backupBadge'); if(!el) return;
+    const age=this.backupAgeDays();
+    const col= age===null||age>=7?'var(--red)':age>=3?'var(--amber)':'var(--green)';
+    const short= age===null?'backup':age===0?'saved today':age+'d';
+    el.innerHTML=`<span style="width:8px;height:8px;border-radius:50%;background:${col};display:inline-block"></span> ${short}`;
+    el.title=this.backupAgeLabel()+' — tap to back up';
   },
   importData(ev){
     const file=ev.target.files[0]; if(!file)return;
     const r=new FileReader();
     r.onload=e=>{ try{ const d=JSON.parse(e.target.result);
       if(!d.funds||!d.txns) throw 0;
+      this.histPush('before-import');
       this.data=d; if(!this.data.snapshots)this.data.snapshots={};
       this.month=Calc.allMonths().slice(-1)[0]; this.persist(); this.renderAll();
       this.toast('✓ Data imported'); }catch(err){ this.toast('⚠ Invalid backup file'); } };
@@ -1489,9 +1798,9 @@ const App = {
     document.getElementById('sec-stockperf').innerHTML=this.periodBar()+`
       <div class="grid g-kpi">
         ${this.kpiCard("Market Value",fmt(last.close),null,"\u25d1","#ff6b6b")}
-        ${this.kpiCard("Invested Cost",fmt(last.cost),null,"\u25c7","#5b8cff")}
+        ${this.kpiCard("Invested Cost",fmt(last.cost),null,"\u25c7","#12cf8f")}
         ${this.kpiCard("Unrealized P/L",fmtC(last.unreal),last.cost?last.unreal/last.cost*100:null,"\u25d4","#2fd68a")}
-        ${this.kpiCard("Period Gain",fmtC(last.cumGain),null,"\u25b2","#7c5cff")}
+        ${this.kpiCard("Period Gain",fmtC(last.cumGain),null,"\u25b2","#0bbf9a")}
         ${this.kpiCard("Dividends",fmt(totDiv),null,"\u25c9","#e0b34d")}
         ${this.kpiCard("Best Month",bestMonth?fmtPct(bestMonth.retPct):"\u2014",null,"\u2691",bestMonth&&bestMonth.retPct>=0?"#2fd68a":"#ff6b6b")}
       </div>
@@ -1515,7 +1824,7 @@ const App = {
     const L=rows.map(r=>monthLabel(r.mk));
     this.chart('spValue',{type:'line',data:{labels:L,datasets:[
       {label:'Market value',data:rows.map(r=>r.close),borderColor:this.css('--accent'),
-        backgroundColor:this.gradient('spValue','rgba(91,140,255,.28)','rgba(91,140,255,0)'),fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
+        backgroundColor:this.gradient('spValue','rgba(18,207,143,.28)','rgba(18,207,143,0)'),fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
       {label:'Cost',data:rows.map(r=>r.cost),borderColor:this.css('--txt-mute'),borderDash:[5,4],fill:false,borderWidth:1.6,pointRadius:0}]},
       options:{plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>CUR+' '+(v/1000).toFixed(0)+'k'}}}}});
     this.chart('spRet',{type:'bar',data:{labels:L,datasets:[{data:rows.map(r=>r.retPct),
@@ -1560,9 +1869,9 @@ const App = {
 
     document.getElementById('sec-history').innerHTML=this.periodBar()+`
       <div class="grid g-kpi">
-        ${this.kpiCard("Snapshots",snaps.length,null,"\u23f2","#5b8cff")}
+        ${this.kpiCard("Snapshots",snaps.length,null,"\u23f2","#12cf8f")}
         ${this.kpiCard("Net Worth Change",fmtC(nwDelta),first.netWorth?nwDelta/first.netWorth*100:null,"\u25ed","#2fd68a")}
-        ${this.kpiCard("Investment Change",fmtC(invDelta),first.invested?invDelta/first.invested*100:null,"\u25d1","#7c5cff")}
+        ${this.kpiCard("Investment Change",fmtC(invDelta),first.invested?invDelta/first.invested*100:null,"\u25d1","#0bbf9a")}
         ${this.kpiCard("From \u2192 To",monthLabel(snaps[0].m).split(' ')[0]+" \u2192 "+monthLabel(snaps[snaps.length-1].m).split(' ')[0],null,"\u2194","#e0b34d")}
       </div>
       <div class="card" style="margin-top:16px"><div class="card-head"><div><h3>\u25ed Net Worth & Investments Over Time</h3>
@@ -1581,7 +1890,7 @@ const App = {
     const L=snaps.map(x=>monthLabel(x.m));
     this.chart('histNW',{type:'line',data:{labels:L,datasets:[
       {label:'Net worth',data:snaps.map(x=>x.s.netWorth),borderColor:this.css('--accent'),
-        backgroundColor:this.gradient('histNW','rgba(91,140,255,.28)','rgba(91,140,255,0)'),fill:true,tension:.35,borderWidth:2.5,pointRadius:3},
+        backgroundColor:this.gradient('histNW','rgba(18,207,143,.28)','rgba(18,207,143,0)'),fill:true,tension:.35,borderWidth:2.5,pointRadius:3},
       {label:'Invested',data:snaps.map(x=>x.s.invested),borderColor:this.css('--accent2'),fill:false,tension:.35,borderWidth:2,pointRadius:2}]},
       options:{plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>CUR+' '+(v/100000).toFixed(1)+'L'}}}}});
     this.chart('histEq',{type:'line',data:{labels:L,datasets:[{data:snaps.map(x=>x.s.equityValue||0),
@@ -1704,6 +2013,7 @@ const App = {
     try{
       const d=this.parsePasted(raw);
       if(!d.funds||!d.txns) throw 0;
+      this.histPush('before-paste');
       this.data=d;
       if(!this.data.snapshots) this.data.snapshots={};
       this.ensureCats(); this.ensureInv();
@@ -1778,21 +2088,22 @@ const App = {
         <span class="mono" style="color:${i.color||'var(--txt)'};font-weight:700">${i.note||''}</span></div>
       <div class="bar-mini" style="height:9px"><i style="width:${Math.abs(i.value)/max*100}%;background:${i.color||'var(--grad)'}"></i></div></div>`).join('')}</div>`;
   },
-  svgDonut(data, center){ // data:[{label,value,color}]
+  svgDonut(data, center, click){ // data:[{label,value,color,key}]; click = fn name string
     const total=data.reduce((s,d)=>s+d.value,0)||1; const R=78,r=50,C=100;
     let a=-Math.PI/2, segs='';
     data.forEach(d=>{ const frac=d.value/total; const a2=a+frac*2*Math.PI;
       const x1=C+R*Math.cos(a),y1=C+R*Math.sin(a),x2=C+R*Math.cos(a2),y2=C+R*Math.sin(a2);
       const xi2=C+r*Math.cos(a2),yi2=C+r*Math.sin(a2),xi1=C+r*Math.cos(a),yi1=C+r*Math.sin(a);
       const large=frac>.5?1:0;
-      segs+=`<path d="M${x1} ${y1} A${R} ${R} 0 ${large} 1 ${x2} ${y2} L${xi2} ${yi2} A${r} ${r} 0 ${large} 0 ${xi1} ${yi1} Z" fill="${d.color}" opacity=".92"><title>${d.label}: ${fmt(d.value)}</title></path>`;
+      const clk= click? ` class="seg" style="cursor:pointer" onclick="App.${click}('${encodeURIComponent(d.key!==undefined?d.key:d.label)}')"`:'';
+      segs+=`<path${clk} d="M${x1} ${y1} A${R} ${R} 0 ${large} 1 ${x2} ${y2} L${xi2} ${yi2} A${r} ${r} 0 ${large} 0 ${xi1} ${yi1} Z" fill="${d.color}" opacity=".92"><title>${d.label}: ${fmt(d.value)}${click?' \u2014 tap for detail':''}</title></path>`;
       a=a2; });
     return `<svg viewBox="0 0 200 200" class="svg-chart" style="max-height:220px">${segs}
       <text x="100" y="94" text-anchor="middle" fill="${this.css('--txt-dim')}" font-size="9" font-weight="600">${center.top}</text>
       <text x="100" y="112" text-anchor="middle" fill="${this.css('--txt')}" font-size="15" font-weight="800">${center.mid}</text></svg>`;
   },
   /* -------- treemap -------- */
-  svgTreemap(items){ // [{label,value,color}]
+  svgTreemap(items, click){ // [{label,value,color,key}]; click = fn name string
     const total=items.reduce((s,i)=>s+i.value,0)||1; const W=100,H=54; let x=0,y=0,rowH=0;
     // simple squarified-ish row layout
     const sorted=[...items].sort((a,b)=>b.value-a.value); let cells=''; let rowW=0; let row=[];
@@ -1804,7 +2115,8 @@ const App = {
       while(i<sorted.length && sum<targetRowArea){ row.push(sorted[i]); sum+=sorted[i]._a; i++; }
       const rowHpx = sum/W; let cx=0;
       row.forEach(c=>{ const w=c._a/rowHpx; const pct=(c.value/total*100);
-        cells+=`<g><rect x="${cx}" y="${cursorY}" width="${w-.4}" height="${rowHpx-.4}" fill="${c.color}" rx="1.2" opacity=".9"><title>${c.label}: ${fmt(c.value)} (${pct.toFixed(1)}%)</title></rect>`;
+        const clk= click? ` class="seg" style="cursor:pointer" onclick="App.${click}('${encodeURIComponent(c.key!==undefined?c.key:c.label)}')"`:'';
+        cells+=`<g${clk}><rect x="${cx}" y="${cursorY}" width="${w-.4}" height="${rowHpx-.4}" fill="${c.color}" rx="1.2" opacity=".9"><title>${c.label}: ${fmt(c.value)} (${pct.toFixed(1)}%)${click?" \u2014 tap":""}</title></rect>`;
         if(w>14&&rowHpx>8){ cells+=`<text x="${cx+1.5}" y="${cursorY+5}" fill="#fff" font-size="3" font-weight="700">${c.label}</text><text x="${cx+1.5}" y="${cursorY+9}" fill="#fff" font-size="2.6" opacity=".85">${pct.toFixed(0)}%</text>`; }
         cells+=`</g>`; cx+=w; });
       cursorY+=rowHpx;
@@ -1862,9 +2174,9 @@ const App = {
     return `<svg viewBox="0 0 100 ${H+2}" class="svg-chart" style="max-height:250px" preserveAspectRatio="none">${paths}${rects}</svg>`;
   },
   /* ================= RENDER: OVERVIEW ================= */
-  kpiCard(label,val,delta,icon,glow){
+  kpiCard(label,val,delta,icon,glow,hero){
     const d = delta===null?'':`<div class="delta ${delta>=0?'up':'down'}">${delta>=0?'▲':'▼'} ${Math.abs(delta).toFixed(1)}%</div>`;
-    return `<div class="kpi" style="--accent-glow:${glow||'var(--accent)'}">
+    return `<div class="kpi${hero?' hero':''}" style="--accent-glow:${glow||'var(--accent)'}">
       <div class="ic-badge">${icon}</div>
       <div class="label">${label}</div><div class="val mono">${val}</div>${d}</div>`;
   },
@@ -1882,11 +2194,11 @@ const App = {
     const kpis=[
       this.kpiCard("Cash & Bank",fmt(cashBank), null,"◧","#3ad0e0"),
       this.kpiCard("Savings & FD",fmt(savingsFD), null,"◰","#e0b34d"),
-      this.kpiCard("Investments",fmt(invSum), null,"◑","#7c5cff"),
-      this.kpiCard("Total Assets",fmt(totalAssets), null,"◢","#5b8cff"),
+      this.kpiCard("Investments",fmt(invSum), null,"◑","#0bbf9a"),
+      this.kpiCard("Total Assets",fmt(totalAssets), null,"◢","#12cf8f"),
       this.kpiCard("Income ("+monthLabel(m).split(' ')[0]+")",fmt(inc), prevInc?((inc-prevInc)/prevInc*100):null,"↑","#2fd68a"),
       this.kpiCard("Expenses ("+monthLabel(m).split(' ')[0]+")",fmt(exp), prevExp?((exp-prevExp)/prevExp*100):null,"↓","#ff6b6b"),
-      this.kpiCard("Net Worth",fmt(nw), prevNw?((nw-prevNw)/prevNw*100):0,"◭","#5b8cff"),
+      this.kpiCard("Net Worth",fmt(nw), prevNw?((nw-prevNw)/prevNw*100):0,"◆","#1ad39a",true),
       this.kpiCard("Monthly Savings",fmtC(sav), sr?sr:null,"◱","#2fd68a"),
     ].join('');
 
@@ -1906,7 +2218,7 @@ const App = {
         <div class="card"><div class="card-head"><div><h3>◭ Net Worth Trajectory</h3><div class="caption">Total assets over time</div></div></div>
           <div class="chart-wrap" style="height:260px"><canvas id="ovNwChart"></canvas></div></div>
         <div class="card"><div class="card-head"><div><h3>◕ Expense Breakdown</h3><div class="caption">${monthLabel(m)}</div></div></div>
-          ${donut.length?this.svgDonut(donut,{top:"Total",mid:fmt(exp)}):'<div class="empty"><div class="big">◔</div>No expenses yet</div>'}
+          ${donut.length?this.svgDonut(donut,{top:"Total",mid:fmt(exp)},'expenseCat'):'<div class="empty"><div class="big">◔</div>No expenses yet</div>'}
           <div class="legend">${donut.slice(0,6).map(d=>`<div class="li"><span class="dot" style="background:${d.color}"></span>${d.label}</div>`).join('')}</div>
         </div>
       </div>
@@ -1924,7 +2236,7 @@ const App = {
     const nwSeries=months.map(mm=>Calc.totalNetWorth(mm));
     this.chart('ovNwChart',{type:'line',data:{labels:months.map(monthLabel),
       datasets:[{data:nwSeries,borderColor:this.css('--accent'),borderWidth:2.5,tension:.35,fill:true,
-        backgroundColor:this.gradient('ovNwChart','rgba(91,140,255,.35)','rgba(91,140,255,0)'),pointRadius:3,pointBackgroundColor:this.css('--accent')}]},
+        backgroundColor:this.gradient('ovNwChart','rgba(18,207,143,.35)','rgba(18,207,143,0)'),pointRadius:3,pointBackgroundColor:this.css('--accent')}]},
       options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>CUR+(v/1000)+'k'}},x:{}}}});
     this.chart('ovAllocChart',{type:'doughnut',data:{labels:['Liquid','Invested'],
       datasets:[{data:[Calc.liquid(m),Calc.invested(m)],backgroundColor:[this.css('--green'),this.css('--accent2')],borderWidth:0}]},
@@ -1950,8 +2262,8 @@ const App = {
     const byType={}; this.data.funds.forEach(f=>byType[f.type]=(byType[f.type]||0)+Calc.fundValue(f.id));
     document.getElementById('sec-funds').innerHTML=`
       <div class="grid g-kpi">
-        ${this.kpiCard("Total Balance",fmt(total),null,"▤","#5b8cff")}
-        ${this.kpiCard("Number of Funds",this.data.funds.length,null,"◈","#7c5cff")}
+        ${this.kpiCard("Total Balance",fmt(total),null,"▤","#12cf8f")}
+        ${this.kpiCard("Number of Funds",this.data.funds.length,null,"◈","#0bbf9a")}
         ${this.kpiCard("Liquid",fmt(Calc.liquid()),null,"◇","#2fd68a")}
         ${this.kpiCard("Liabilities",fmt(Calc.totalLiabilities()),null,"◈","#f472b6")}
       </div>
@@ -1959,7 +2271,7 @@ const App = {
         <div class="card"><div class="card-head"><h3>▤ All Funds & Accounts</h3><div class="pill accent" onclick="App.formFund()">＋ New Fund</div></div>
           <div class="tbl-wrap"><table><thead><tr><th>Fund</th><th>Type</th><th>Balance</th><th>Invested</th><th>Gain/Loss</th><th></th></tr></thead><tbody>${rows}</tbody></table></div></div>
         <div class="card"><div class="card-head"><h3>◑ Allocation by Type</h3></div>
-          ${this.svgTreemap(Object.entries(byType).filter(([,v])=>v>0).map(([k,v])=>({label:FUND_TYPES[k].label,value:v,color:FUND_TYPES[k].color})))}
+          ${this.svgTreemap(Object.entries(byType).filter(([,v])=>v>0).map(([k,v])=>({label:FUND_TYPES[k].label,value:v,color:FUND_TYPES[k].color,key:k})),'typeDrill')}
           <div class="legend">${Object.entries(byType).filter(([,v])=>v>0).map(([k,v])=>`<div class="li"><span class="dot" style="background:${FUND_TYPES[k].color}"></span>${FUND_TYPES[k].label} · ${(v/total*100).toFixed(0)}%</div>`).join('')}</div></div>
       </div>`;
   },
@@ -1971,9 +2283,9 @@ const App = {
     const growth=first.nw?((cur.nw-first.nw)/first.nw*100):0;
     document.getElementById('sec-networth').innerHTML=`
       <div class="grid g-kpi">
-        ${this.kpiCard("Current Net Worth",fmt(cur.nw),null,"◭","#5b8cff")}
+        ${this.kpiCard("Current Net Worth",fmt(cur.nw),null,"◭","#12cf8f")}
         ${this.kpiCard("Liquid Assets",fmt(cur.liq),null,"◇","#2fd68a")}
-        ${this.kpiCard("Invested Assets",fmt(cur.inv),null,"◑","#7c5cff")}
+        ${this.kpiCard("Invested Assets",fmt(cur.inv),null,"◑","#0bbf9a")}
         ${this.kpiCard("Total Growth",fmtPct(growth),null,"▲","#e0b34d")}
       </div>
       <div class="card" style="margin-top:16px"><div class="card-head"><h3>◭ Net Worth Composition Over Time</h3></div>
@@ -1987,7 +2299,7 @@ const App = {
       </div>`;
     this.chart('nwStack',{type:'line',data:{labels:months.map(monthLabel),datasets:[
       {label:'Liquid',data:series.map(s=>s.liq),borderColor:this.css('--green'),backgroundColor:'rgba(47,214,138,.25)',fill:true,tension:.35,borderWidth:2,pointRadius:2},
-      {label:'Invested',data:series.map(s=>s.inv),borderColor:this.css('--accent2'),backgroundColor:'rgba(124,92,255,.25)',fill:true,tension:.35,borderWidth:2,pointRadius:2}]},
+      {label:'Invested',data:series.map(s=>s.inv),borderColor:this.css('--accent2'),backgroundColor:'rgba(11,191,154,.25)',fill:true,tension:.35,borderWidth:2,pointRadius:2}]},
       options:{scales:{y:{stacked:true,ticks:{callback:v=>CUR+(v/1000)+'k'}},x:{stacked:true}},plugins:{legend:{position:'bottom'}}}});
     const chg=series.map((s,i)=>i>0?s.nw-series[i-1].nw:0);
     this.chart('nwChange',{type:'bar',data:{labels:months.map(monthLabel),datasets:[{data:chg,
@@ -2017,14 +2329,14 @@ const App = {
     document.getElementById('sec-income').innerHTML=this.periodBar()+`
       <div class="grid g-kpi">
         ${this.kpiCard("Income ("+this.periodLabel()+")",fmt(total),null,"↑","#2fd68a")}
-        ${this.kpiCard("Monthly Average",fmt(avg),null,"◱","#5b8cff")}
-        ${this.kpiCard("Income Sources",Object.keys(byCat).length,null,"◈","#7c5cff")}
+        ${this.kpiCard("Monthly Average",fmt(avg),null,"◱","#12cf8f")}
+        ${this.kpiCard("Income Sources",Object.keys(byCat).length,null,"◈","#0bbf9a")}
         ${this.kpiCard("Entries",txns.length,null,"☰","#e0b34d")}
       </div>
       <div class="grid g-2" style="margin-top:16px">
         <div class="card"><div class="card-head"><h3>↑ Income Trend</h3></div><div class="chart-wrap" style="height:250px"><canvas id="incTrend"></canvas></div></div>
         <div class="card"><div class="card-head"><div><h3>◕ By Source</h3><div class="caption">${this.periodLabel()}</div></div></div>
-          ${donut.length?this.svgDonut(donut,{top:"Total",mid:fmt(total)}):'<div class="empty"><div class="big">↑</div>No income logged</div>'}
+          ${donut.length?this.svgDonut(donut,{top:"Total",mid:fmt(total)},'incomeCat'):'<div class="empty"><div class="big">↑</div>No income logged</div>'}
           <div class="legend">${donut.map(d=>`<div class="li"><span class="dot" style="background:${d.color}"></span>${d.label}</div>`).join('')}</div></div>
       </div>
       <div class="card" style="margin-top:16px"><div class="card-head"><h3>↑ Income Entries · ${this.periodLabel()}</h3><div style="display:flex;gap:8px">
@@ -2046,14 +2358,14 @@ const App = {
     document.getElementById('sec-expenses').innerHTML=this.periodBar()+`
       <div class="grid g-kpi">
         ${this.kpiCard("Expenses ("+this.periodLabel()+")",fmt(total),null,"↓","#ff6b6b")}
-        ${this.kpiCard("Monthly Average",fmt(avg),null,"◱","#5b8cff")}
+        ${this.kpiCard("Monthly Average",fmt(avg),null,"◱","#12cf8f")}
         ${this.kpiCard("Budget (period)",fmt(budgetTotal),null,"◰","#e0b34d")}
         ${this.kpiCard("vs Budget", budgetTotal?fmtPct((total-budgetTotal)/budgetTotal*100):"—",null,"⚖","#ffb454")}
       </div>
       <div class="grid g-2" style="margin-top:16px">
         <div class="card"><div class="card-head"><h3>↓ Expense Trend</h3></div><div class="chart-wrap" style="height:250px"><canvas id="expTrend"></canvas></div></div>
         <div class="card"><div class="card-head"><div><h3>◕ By Category</h3><div class="caption">${this.periodLabel()}</div></div></div>
-          ${donut.length?this.svgDonut(donut,{top:"Total",mid:fmt(total)}):'<div class="empty"><div class="big">↓</div>No expenses logged</div>'}
+          ${donut.length?this.svgDonut(donut,{top:"Total",mid:fmt(total)},'expenseCat'):'<div class="empty"><div class="big">↓</div>No expenses logged</div>'}
           <div class="legend">${donut.slice(0,7).map(d=>`<div class="li"><span class="dot" style="background:${d.color}"></span>${d.label}</div>`).join('')}</div></div>
       </div>
       <div class="card" style="margin-top:16px"><div class="card-head"><h3>↓ Expense Entries · ${this.periodLabel()}</h3><div style="display:flex;gap:8px">
@@ -2092,8 +2404,8 @@ const App = {
     const flows={}; transfers.forEach(x=>{ const k=x.fromFundId+'|'+x.toFundId; flows[k]=(flows[k]||0)+x.amount; });
     document.getElementById('sec-transfers').innerHTML=`
       <div class="grid g-kpi">
-        ${this.kpiCard("Total Transfers",transfers.length,null,"⇄","#5b8cff")}
-        ${this.kpiCard("Volume Moved",fmt(totalMoved),null,"⟿","#7c5cff")}
+        ${this.kpiCard("Total Transfers",transfers.length,null,"⇄","#12cf8f")}
+        ${this.kpiCard("Volume Moved",fmt(totalMoved),null,"⟿","#0bbf9a")}
         ${this.kpiCard("This Month",Calc.monthTxns(this.month).filter(x=>x.type==='transfer').length,null,"◱","#2fd68a")}
       </div>
       <div class="card" style="margin-top:16px"><div class="card-head"><h3>⇄ Fund-to-Fund Flow (Sankey)</h3><div class="pill accent" onclick="App.formTxn('transfer')">＋ New Transfer</div></div>
@@ -2152,15 +2464,15 @@ const App = {
         <span style="font-size:10px;color:var(--txt-mute)">${totCur?(p.current/totCur*100).toFixed(1):'0.0'}%</span></td></tr>`).join('');
     document.getElementById('sec-portfolio').innerHTML=`
       <div class="grid g-kpi">
-        ${this.kpiCard("Portfolio Value",fmt(totCur),null,"◑","#7c5cff")}
-        ${this.kpiCard("Total Invested",fmt(totInv),null,"◇","#5b8cff")}
+        ${this.kpiCard("Portfolio Value",fmt(totCur),null,"◑","#0bbf9a")}
+        ${this.kpiCard("Total Invested",fmt(totInv),null,"◇","#12cf8f")}
         ${this.kpiCard("Total Gain/Loss",fmtC(totGain),totPct,"◔","#2fd68a")}
         ${this.kpiCard("Weighted CAGR",fmtPct(wCagr),null,"▲","#e0b34d")}
       </div>
       <div class="grid g-2" style="margin-top:16px">
         <div class="card"><div class="card-head"><div><h3>◑ Allocation Treemap</h3>
           <div class="caption">Every instrument, live from the Instruments tab</div></div></div>
-          ${pf.filter(p=>p.current>0).length?this.svgTreemap(pf.filter(p=>p.current>0).map(p=>({label:p.name,value:p.current,color:FUND_TYPES[p.type].color}))):'<div class="empty">No instruments yet</div>'}</div>
+          ${pf.filter(p=>p.current>0).length?this.svgTreemap(pf.filter(p=>p.current>0).map(p=>({label:p.name,value:p.current,color:FUND_TYPES[p.type].color,key:p.fundId})),'fundDetail'):'<div class="empty">No instruments yet</div>'}</div>
         <div class="card"><div class="card-head"><h3>◕ Gain by Holding</h3></div>
           <div class="chart-wrap" style="height:230px"><canvas id="pfGain"></canvas></div></div>
       </div>
@@ -2202,7 +2514,7 @@ const App = {
       <div class="grid g-kpi">
         ${this.kpiCard("Inflows ("+this.periodLabel()+")",fmt(mi),null,"↑","#2fd68a")}
         ${this.kpiCard("Outflows",fmt(me),null,"↓","#ff6b6b")}
-        ${this.kpiCard("Net Cash Flow",fmtC(mi-me),null,"⟿","#5b8cff")}
+        ${this.kpiCard("Net Cash Flow",fmtC(mi-me),null,"⟿","#12cf8f")}
         ${this.kpiCard("Savings Rate",this.pSavingsRate().toFixed(1)+"%",null,"◱","#e0b34d")}
       </div>
       <div class="card" style="margin-top:16px"><div class="card-head"><div><h3>⟿ Cash Flow Sankey · ${this.periodLabel()}</h3><div class="caption">Sources → Pool → Uses</div></div></div>
@@ -2216,7 +2528,7 @@ const App = {
       {label:'Expense',data:exp,backgroundColor:this.css('--red'),borderRadius:4}]},
       options:{plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>CUR+(v/1000)+'k'}}}}});
     this.chart('cfCum',{type:'line',data:{labels:months.map(monthLabel),datasets:[{data:cum,borderColor:this.css('--accent'),
-      backgroundColor:this.gradient('cfCum','rgba(91,140,255,.3)','rgba(91,140,255,0)'),fill:true,tension:.35,borderWidth:2.5,pointRadius:3}]},
+      backgroundColor:this.gradient('cfCum','rgba(18,207,143,.3)','rgba(18,207,143,0)'),fill:true,tension:.35,borderWidth:2.5,pointRadius:3}]},
       options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>CUR+(v/1000)+'k'}}}}});
   },
   /* ================= RENDER: BUDGET ================= */
@@ -2235,7 +2547,7 @@ const App = {
           <span style="font-size:10.5px;color:${col};font-weight:700">${pct.toFixed(0)}%</span></td></tr>`;}).join('');
     document.getElementById('sec-budget').innerHTML=`
       <div class="grid g-kpi">
-        ${this.kpiCard("Total Budget",fmt(totBud),null,"◰","#5b8cff")}
+        ${this.kpiCard("Total Budget",fmt(totBud),null,"◰","#12cf8f")}
         ${this.kpiCard("Actual Spend",fmt(totAct),null,"↓","#ff6b6b")}
         ${this.kpiCard("Remaining",fmtC(totBud-totAct),null,"◇","#2fd68a")}
         ${this.kpiCard("Utilisation",totBud?(totAct/totBud*100).toFixed(0)+"%":"—",null,"⚖","#e0b34d")}
@@ -2266,7 +2578,7 @@ const App = {
       return `<div class="card"><div style="display:flex;gap:16px;align-items:center">
         <svg width="80" height="80" class="progress-ring"><circle cx="40" cy="40" r="${R}" fill="none" stroke="var(--stroke2)" stroke-width="7"/>
           <circle cx="40" cy="40" r="${R}" fill="none" stroke="url(#gg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/>
-          <defs><linearGradient id="gg"><stop offset="0%" stop-color="#5b8cff"/><stop offset="100%" stop-color="#7c5cff"/></linearGradient></defs></svg>
+          <defs><linearGradient id="gg"><stop offset="0%" stop-color="#12cf8f"/><stop offset="100%" stop-color="#0bbf9a"/></linearGradient></defs></svg>
         <div style="flex:1"><div style="transform:rotate(0)"><b style="font-size:14px">${g.name}</b>
           <div style="font-size:22px;font-weight:800;margin:4px 0" class="mono">${g.pct.toFixed(0)}%</div>
           <div style="font-size:12px;color:var(--txt-dim)">${fmt(g.cur)} / ${fmt(g.target)}</div>
@@ -2277,8 +2589,8 @@ const App = {
     const totT=goals.reduce((s,g)=>s+g.target,0), totC=goals.reduce((s,g)=>s+g.cur,0);
     document.getElementById('sec-goals').innerHTML=`
       <div class="grid g-kpi">
-        ${this.kpiCard("Active Goals",goals.length,null,"◎","#5b8cff")}
-        ${this.kpiCard("Combined Target",fmt(totT),null,"◈","#7c5cff")}
+        ${this.kpiCard("Active Goals",goals.length,null,"◎","#12cf8f")}
+        ${this.kpiCard("Combined Target",fmt(totT),null,"◈","#0bbf9a")}
         ${this.kpiCard("Saved Toward Goals",fmt(totC),null,"◇","#2fd68a")}
         ${this.kpiCard("Overall Progress",totT?(totC/totT*100).toFixed(0)+"%":"—",null,"▲","#e0b34d")}
       </div>
@@ -2303,8 +2615,8 @@ const App = {
       <div class="grid g-kpi">
         ${this.kpiCard("Avg Savings Rate",avgSR.toFixed(1)+"%",null,"◱","#2fd68a")}
         ${this.kpiCard("NW Volatility",volatility.toFixed(1)+"%",null,"〜","#ffb454")}
-        ${this.kpiCard("Emergency Runway",emergencyMonths.toFixed(1)+" mo",null,"🛡","#5b8cff")}
-        ${this.kpiCard("Avg Monthly Return",(mr.reduce((s,x)=>s+x.ret,0)/(mr.length||1)).toFixed(2)+"%",null,"▲","#7c5cff")}
+        ${this.kpiCard("Emergency Runway",emergencyMonths.toFixed(1)+" mo",null,"🛡","#12cf8f")}
+        ${this.kpiCard("Avg Monthly Return",(mr.reduce((s,x)=>s+x.ret,0)/(mr.length||1)).toFixed(2)+"%",null,"▲","#0bbf9a")}
       </div>
       <div class="grid g-2" style="margin-top:16px">
         <div class="card"><div class="card-head"><h3>◔ Spending Heatmap</h3><div class="caption">Category × month intensity (৳'000)</div></div>
@@ -2345,8 +2657,8 @@ const App = {
         <div class="grid g-kpi" style="margin-top:6px">
           ${this.kpiCard("Income",fmt(inc),null,"↑","#2fd68a")}
           ${this.kpiCard("Expenses",fmt(exp),null,"↓","#ff6b6b")}
-          ${this.kpiCard("Net Savings",fmtC(sav),null,"◇","#5b8cff")}
-          ${this.kpiCard("Net Worth",fmt(Calc.totalNetWorth(m)),null,"◭","#7c5cff")}
+          ${this.kpiCard("Net Savings",fmtC(sav),null,"◇","#12cf8f")}
+          ${this.kpiCard("Net Worth",fmt(Calc.totalNetWorth(m)),null,"◭","#0bbf9a")}
         </div>
         ${snap?`<p class="hint" style="margin-top:14px">✓ Closed on ${new Date(snap.closedAt).toLocaleString()} · Net worth snapshot: ${fmt(snap.netWorth)}</p>`:'<p class="hint" style="margin-top:14px">This month has not been closed yet.</p>'}
       </div>
@@ -2756,9 +3068,12 @@ const App = {
         +`<div class="field"><label>Risk Rating</label><select id="p_risk">
             ${['Low','Moderate','High','Very High'].map(r=>`<option ${(p.risk||'High')===r?'selected':''}>${r}</option>`).join('')}</select></div>`;
     } else if(t==='mutual'){
+      const multi=Array.isArray(p.lots)&&p.lots.length>1;
       body+=`<div class="field-row">${tx('p_name','Scheme Name',p.name,'ICB AMCL Growth')}${tx('p_bank','Fund House',p.bank,'ICB')}</div>`
-        +`<div class="field-row">${num('p_units','Units',p.units,'1000')}${num('p_buynav','Purchase NAV',p.purchaseNav,'11.50')}</div>`
-        +`<div class="field-row">${num('p_curnav','Current NAV',p.currentNav,'12.80')}${dt('p_start','Purchase Date',p.startDate)}</div>`;
+        +`<div class="field-row"><div class="field"><label>Units ${multi?'(total)':''}</label><input type="number" step="any" id="p_units" value="${p.units||''}" placeholder="1000" ${multi?'readonly title="Managed via Units \u2014 buy/sell"':''}></div>
+          <div class="field"><label>Avg Purchase NAV</label><input type="number" step="any" id="p_buynav" value="${p.purchaseNav||''}" placeholder="11.50" ${multi?'readonly title="Managed via Units \u2014 buy/sell"':''}></div></div>`
+        +`<div class="field-row">${num('p_curnav','Current NAV',p.currentNav,'12.80')}${dt('p_start','First Purchase Date',p.startDate)}</div>`
+        +`${p.id&&multi?'<p class="hint" style="margin:-8px 0 14px;color:var(--accent)">This fund has '+p.lots.length+' purchase lots \u2014 units and average NAV are computed from them. Use the \u25f1 Units button on the Instruments list to buy more or sell.</p>':''}`;
     }
     const cashFunds=this.data.funds.filter(x=>!FUND_TYPES[x.type].invest);
     const opt=(sel)=>'<option value="">\u2014 none \u2014</option><option value="__opening__" '+(sel==='__opening__'?'selected':'')+'>Opening Balances (already tracked)</option>'+cashFunds.map(x=>`<option value="${x.id}" ${x.id===sel?'selected':''}>${x.name}</option>`).join('');
@@ -2781,6 +3096,119 @@ const App = {
     </div>
     <button class="btn primary" onclick="App.savePosition('${fundId}','${p.id||''}')">${posId?'Update':'Add'} Entry</button>`;
     this.openModal(posId?'Edit Entry':'New Entry \u00b7 '+f.name, body);
+  },
+  /* ---------- MUTUAL FUND LOTS: buy more / sell units ---------- */
+  mfLots(p){
+    if(Array.isArray(p.lots)&&p.lots.length) return p.lots;
+    if((+p.units||0)>0) return [{id:'legacy',units:+p.units||0,nav:+p.purchaseNav||0,date:p.startDate||''}];
+    return [];
+  },
+  mfRecalc(p){
+    const lots=this.mfLots(p);
+    const buys=lots.filter(l=>(+l.units||0)>0);
+    const bought=buys.reduce((s,l)=>s+(+l.units||0),0);
+    const sold=lots.filter(l=>(+l.units||0)<0).reduce((s,l)=>s+Math.abs(+l.units||0),0);
+    const avgNav=bought? buys.reduce((s,l)=>s+(+l.units||0)*(+l.nav||0),0)/bought : 0;
+    p.units = bought - sold;
+    p.purchaseNav = avgNav;
+    const dts=buys.map(l=>l.date).filter(Boolean).sort();
+    if(dts.length) p.startDate=dts[0];
+  },
+  formMfLots(pid){
+    const p=this.data.positions.find(x=>x.id===pid); if(!p) return;
+    if(!Array.isArray(p.lots)||!p.lots.length){
+      p.lots = ((+p.units||0)>0)? [{id:uid(),units:+p.units||0,nav:+p.purchaseNav||0,date:p.startDate||''}] : [];
+    }
+    const m=Inv.mf(p)||{units:0,buyNav:0,cost:0};
+    const rows=p.lots.slice().sort((a,b)=>(a.date||'').localeCompare(b.date||'')).map(l=>{
+      const u=+l.units||0;
+      return `<tr>
+        <td class="mono" style="font-size:11.5px">${l.date||'\u2014'}</td>
+        <td class="mono ${u<0?'neg':''}">${u<0?'sell ':''}${Math.abs(u)}</td>
+        <td class="mono">${(+l.nav||0).toFixed(2)}</td>
+        <td class="mono">${fmt(Math.abs(u)*(+l.nav||0))}</td>
+        <td class="row-actions"><button onclick="App.delMfLot('${pid}','${l.id}')">\u{1f5d1}</button></td></tr>`;
+    }).join('');
+    const banks=this.data.funds.filter(x=>x.type==='bank'||x.type==='cash');
+    const body=`<p class="hint" style="margin:0 0 12px"><b>${p.name}</b> \u00b7 ${m.units} units \u00b7 avg NAV ${m.buyNav.toFixed(2)} \u00b7 cost ${fmt(m.cost)}</p>
+      <div class="field"><label>Current NAV</label><input type="number" step="any" id="mf_curnav" value="${p.currentNav||''}" placeholder="12.80"></div>
+      <div class="tbl-wrap" style="margin-bottom:14px"><table><thead><tr><th>Date</th><th>Units</th><th>NAV</th><th>Value</th><th></th></tr></thead>
+        <tbody>${rows||'<tr><td colspan=5 style="text-align:center;color:var(--txt-mute);padding:16px">No lots yet</td></tr>'}</tbody></table></div>
+      <div style="padding-top:14px;border-top:1px solid var(--stroke)">
+        <h3 style="font-size:13px;margin-bottom:10px">\uff0b Buy more units</h3>
+        <div class="field-row">
+          <div class="field"><label>Units</label><input type="number" step="any" id="mfb_units" placeholder="500"></div>
+          <div class="field"><label>Buy NAV</label><input type="number" step="any" id="mfb_nav" placeholder="12.50"></div></div>
+        <div class="field-row">
+          <div class="field"><label>Buy date</label><input type="date" id="mfb_date" value="${todayStr()}"></div>
+          <div class="field"><label>Paid from (optional)</label><select id="mfb_from"><option value="">\u2014 none \u2014</option>${banks.map(b=>`<option value="${b.id}">${b.name}</option>`).join('')}</select></div></div>
+        <button class="btn primary" onclick="App.addMfLot('${pid}')">Add Purchase</button>
+      </div>
+      <div style="padding-top:14px;margin-top:14px;border-top:1px solid var(--stroke)">
+        <h3 style="font-size:13px;margin-bottom:10px">\u2212 Sell units</h3>
+        <div class="field-row">
+          <div class="field"><label>Units to sell</label><input type="number" step="any" id="mfs_units" placeholder="max ${m.units}"></div>
+          <div class="field"><label>Sell NAV</label><input type="number" step="any" id="mfs_nav" placeholder="current NAV"></div></div>
+        <div class="field-row">
+          <div class="field"><label>Sell date</label><input type="date" id="mfs_date" value="${todayStr()}"></div>
+          <div class="field"><label>Proceeds into</label><select id="mfs_to"><option value="">\u2014 choose \u2014</option>${banks.map(b=>`<option value="${b.id}" ${p.payoutTo===b.id?'selected':''}>${b.name}</option>`).join('')}</select></div></div>
+        <button class="btn ghost" style="width:100%" onclick="App.sellMfUnits('${pid}')">Record Sale \u2192 credit proceeds</button>
+      </div>
+      <p class="hint" style="margin-top:12px">Average cost recalculates across all purchases. Selling books the realized gain/loss against average cost and credits the proceeds to the chosen account.</p>`;
+    this.openModal(p.name+' \u00b7 Units', body);
+  },
+  _mfSaveCurNav(pid){ const p=this.data.positions.find(x=>x.id===pid); const e=document.getElementById('mf_curnav');
+    if(p&&e&&e.value.trim()!=='') p.currentNav=parseFloat(e.value); },
+  addMfLot(pid){
+    const p=this.data.positions.find(x=>x.id===pid);
+    const units=parseFloat(document.getElementById('mfb_units').value);
+    const nav=parseFloat(document.getElementById('mfb_nav').value);
+    const date=document.getElementById('mfb_date').value;
+    const from=document.getElementById('mfb_from').value;
+    if(!units||units<=0||nav===undefined||isNaN(nav)){ this.toast('\u26a0 Enter units and NAV'); return; }
+    this._mfSaveCurNav(pid);
+    if(!Array.isArray(p.lots)||!p.lots.length) p.lots=this.mfLots(p).map(l=>({id:uid(),units:l.units,nav:l.nav,date:l.date}));
+    const lot={id:uid(),units,nav,date}; p.lots.push(lot);
+    this.mfRecalc(p);
+    if(from && Calc.fundById(from)){
+      this.data.txns.push({id:uid(),date:date||todayStr(),type:'transfer',amount:units*nav,
+        fromFundId:from,toFundId:p.fundId,note:'Bought '+units+' units \u00b7 '+p.name});
+    }
+    this.persist(); this.formMfLots(pid); this.renderAll(); this.toast('\u2713 Purchase added');
+  },
+  delMfLot(pid,lotId){
+    const p=this.data.positions.find(x=>x.id===pid);
+    p.lots=(p.lots||[]).filter(l=>l.id!==lotId);
+    this.mfRecalc(p);
+    this.persist(); this.formMfLots(pid); this.renderAll(); this.toast('\u2713 Lot removed');
+  },
+  sellMfUnits(pid){
+    const p=this.data.positions.find(x=>x.id===pid);
+    this._mfSaveCurNav(pid);
+    const units=parseFloat(document.getElementById('mfs_units').value);
+    const nav=parseFloat(document.getElementById('mfs_nav').value);
+    const date=document.getElementById('mfs_date').value||todayStr();
+    const to=document.getElementById('mfs_to').value;
+    const m=Inv.mf(p)||{units:0,buyNav:0};
+    if(!units||units<=0){ this.toast('\u26a0 Enter units to sell'); return; }
+    if(units>m.units+1e-6){ this.toast('\u26a0 You only hold '+m.units+' units'); return; }
+    if(nav===undefined||isNaN(nav)){ this.toast('\u26a0 Enter sell NAV'); return; }
+    if(!to){ this.toast('\u26a0 Choose where the proceeds landed'); return; }
+    const avgCostNav=m.buyNav;
+    const proceeds=units*nav;
+    const pl=(nav-avgCostNav)*units;
+    if(!Array.isArray(p.lots)||!p.lots.length) p.lots=this.mfLots(p).map(l=>({id:uid(),units:l.units,nav:l.nav,date:l.date}));
+    p.lots.push({id:uid(),units:-units,nav,date,sell:true});
+    p.realized=Array.isArray(p.realized)?p.realized:[];
+    p.realized.push({id:uid(),date,units,sellNav:nav,costNav:avgCostNav,pl});
+    this.mfRecalc(p);
+    // book the realized gain into the fund, then move proceeds out (keeps balances reconciled)
+    if(Math.abs(pl)>0.5) this.data.txns.push({id:uid(),date,type:'valuation',amount:pl,fundId:p.fundId,
+      note:p.name+(pl>=0?' \u2014 realized gain on sale':' \u2014 realized loss on sale')});
+    this.data.txns.push({id:uid(),date,type:'transfer',amount:proceeds,fromFundId:p.fundId,toFundId:to,
+      note:'Sold '+units+' units \u00b7 '+p.name});
+    this.persist(); this.formMfLots(pid); this.renderAll();
+    this.toast('\u2713 Sold '+units+' units \u00b7 realized '+fmtC(pl));
   },
   _fdTypeToggle(){
     const isl=document.getElementById('p_islamic').value==='1';
@@ -2810,7 +3238,10 @@ const App = {
       o.actualReturn=v('p_actual'); o.status=v('p_status'); o.risk=v('p_risk');
       if(!o.principal||!o.startDate||!o.tenureMonths){ this.toast('\u26a0 Amount, start and tenure required'); return; }
     } else if(t==='mutual'){
+      const prevm=this.data.positions.find(x=>x.id===posId);
       o.units=v('p_units'); o.purchaseNav=v('p_buynav'); o.currentNav=v('p_curnav'); o.startDate=v('p_start');
+      o.lots=(prevm&&Array.isArray(prevm.lots))?prevm.lots:undefined;
+      o.realized=(prevm&&Array.isArray(prevm.realized))?prevm.realized:undefined;
       if(!o.units||!o.purchaseNav){ this.toast('\u26a0 Units and purchase NAV required'); return; }
     }
     o.fundedFrom=v('p_from')||''; o.payoutTo=v('p_to')||'';
@@ -3185,7 +3616,8 @@ const App = {
         else if(kind==='alt'){ detail=fmt(+p.principal||0)+' \u00b7 '+(p.expReturnMin||0)+'-'+(p.expReturnMax||0)+'% / '+(p.tenureMonths||0)+'mo';
           const st=p.status||'Active';
           status='<span class="tag '+(st==='Completed'?'income':st==='Loss'?'expense':st.indexOf('Matured')===0?'valuation':'transfer')+'">'+(st.indexOf('Matured')===0?'awaiting':st.toLowerCase())+'</span>'; }
-        else if(kind==='mf'){ detail=p.units+' units \u00b7 NAV '+(+p.currentNav||0).toFixed(2); }
+        else if(kind==='mf'){ const rz=(p.realized||[]).reduce((s,r)=>s+(+r.pl||0),0);
+          detail=p.units+' units \u00b7 avg '+(+p.purchaseNav||0).toFixed(2)+' \u00b7 NAV '+(+p.currentNav||0).toFixed(2)+(rz?' \u00b7 realized '+fmtC(rz):''); }
         return `<tr>
           <td><b>${p.name}</b><div style="font-size:11px;color:var(--txt-mute);margin-top:2px">${detail}</div></td>
           <td class="mono">${fmt(val)}</td>
@@ -3195,6 +3627,7 @@ const App = {
           <td class="row-actions" style="white-space:nowrap">
             ${(kind==='fd'&&d&&d.awaiting)?`<button onclick="App.enterProfit('${p.id}')" title="Declare profit for matured term" style="color:var(--cyan)">\u25c9</button>`:''}
             ${(mat&&mat.days<=0&&!p.settled&&kind!=='dps')?`<button onclick="App.redeemPos('${p.id}')" title="Redeem \u2014 credit payout to account" style="color:var(--green);font-weight:700">\u21b5</button>`:''}
+            ${kind==='mf'?`<button onclick="App.formMfLots('${p.id}')" title="Buy more / sell units">\u25f1</button>`:''}
             <button onclick="App.formPosition('${f.id}','${p.id}')">\u270e</button>
             <button onclick="App.delPosition('${p.id}')">\u{1f5d1}</button></td></tr>`;
       }).join('');
@@ -3218,8 +3651,8 @@ const App = {
 
     document.getElementById('sec-instruments').innerHTML=`
       <div class="grid g-kpi">
-        ${this.kpiCard("Entries Tracked",allPos.length,null,"\u25a4","#5b8cff")}
-        ${this.kpiCard("Capital Deployed",fmt(totPrincipal),null,"\u25c7","#7c5cff")}
+        ${this.kpiCard("Entries Tracked",allPos.length,null,"\u25a4","#12cf8f")}
+        ${this.kpiCard("Capital Deployed",fmt(totPrincipal),null,"\u25c7","#0bbf9a")}
         ${this.kpiCard("Value Today",fmt(totValue),null,"\u25d1","#2fd68a")}
         ${this.kpiCard("Weighted Yield",wy.toFixed(2)+"%",null,"\u2696",wy>=this.A().inflation?"#2fd68a":"#ff6b6b")}
         ${this.kpiCard("Next Maturity",nextMat?nextMat.m.days+" days":"—",null,"\u23f3","#e0b34d")}
@@ -3266,10 +3699,10 @@ const App = {
     document.getElementById('sec-equity').innerHTML=`
       <div class="grid g-kpi">
         ${this.kpiCard("Market Value",fmt(mv),null,"\u25d1","#ff6b6b")}
-        ${this.kpiCard("Invested Cost",fmt(cost),null,"\u25c7","#5b8cff")}
+        ${this.kpiCard("Invested Cost",fmt(cost),null,"\u25c7","#12cf8f")}
         ${this.kpiCard("Unrealized P/L",fmtC(pl),cost?pl/cost*100:null,"\u25d4","#2fd68a")}
         ${this.kpiCard("Dividends (net)",fmt(div),null,"\u25c9","#e0b34d")}
-        ${this.kpiCard("Total Return",fmtPct(myRet),null,"\u25b2","#7c5cff")}
+        ${this.kpiCard("Total Return",fmtPct(myRet),null,"\u25b2","#0bbf9a")}
         ${this.kpiCard("Alpha vs DSEX",fmtPct(alpha),null,"\u2694","#3ad0e0")}
       </div>
       ${(()=>{ const sf=this.data.funds.filter(f=>f.type==='stock');
@@ -3366,9 +3799,9 @@ const App = {
 
     document.getElementById('sec-projections').innerHTML=`
       <div class="grid g-kpi">
-        ${this.kpiCard("Blended Return",br.toFixed(1)+"%",null,"\u25d1","#7c5cff")}
+        ${this.kpiCard("Blended Return",br.toFixed(1)+"%",null,"\u25d1","#0bbf9a")}
         ${this.kpiCard("Real Return",(br-a.inflation).toFixed(1)+"%",null,"\u2696",(br-a.inflation)>=0?"#2fd68a":"#ff6b6b")}
-        ${this.kpiCard("Projected "+a.fiYear,fmt(end.nominal),null,"\u25b2","#5b8cff")}
+        ${this.kpiCard("Projected "+a.fiYear,fmt(end.nominal),null,"\u25b2","#12cf8f")}
         ${this.kpiCard("In Today's "+CUR,fmt(end.real),null,"\u25c8","#e0b34d")}
         ${this.kpiCard("FI Number Needed",fmt(fiNumber),null,"\u25ce","#3ad0e0")}
         ${this.kpiCard(onTrack?"Surplus":"Shortfall",fmtC(Math.abs(gap)),null,onTrack?"\u2713":"\u26a0",onTrack?"#2fd68a":"#ff6b6b")}
@@ -3392,7 +3825,7 @@ const App = {
           :'<div class="empty"><div class="big">\u{1f4c5}</div>Add entries on the Instruments page to build your ladder</div>'}</div>`;
     this.chart('projChart',{type:'line',data:{labels:pts.map(p=>p.year),datasets:[
       {label:'Nominal',data:pts.map(p=>p.nominal),borderColor:this.css('--accent'),
-        backgroundColor:this.gradient('projChart','rgba(91,140,255,.3)','rgba(91,140,255,0)'),fill:true,tension:.3,borderWidth:2.5,pointRadius:0},
+        backgroundColor:this.gradient('projChart','rgba(18,207,143,.3)','rgba(18,207,143,0)'),fill:true,tension:.3,borderWidth:2.5,pointRadius:0},
       {label:"Real (today's "+CUR+")",data:pts.map(p=>p.real),borderColor:this.css('--gold'),borderDash:[6,4],fill:false,tension:.3,borderWidth:2,pointRadius:0},
       {label:'FI Target',data:pts.map(()=>fiNumber),borderColor:this.css('--red'),borderDash:[3,3],fill:false,borderWidth:1.5,pointRadius:0}]},
       options:{plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>CUR+' '+(v/100000).toFixed(0)+'L'}}}}});
@@ -3545,9 +3978,9 @@ const App = {
 
     document.getElementById('sec-journey').innerHTML=`
       <div class="grid g-kpi">
-        ${this.kpiCard("Current Net Worth",fmt(E.nw),null,"\u25ed","#5b8cff")}
+        ${this.kpiCard("Current Net Worth",fmt(E.nw),null,"\u25ed","#12cf8f")}
         ${this.kpiCard("Freedom Number",fmt(E.milestones.find(m=>m.key==='full').amount),null,"\u25ce","#3ad0e0")}
-        ${this.kpiCard("Progress",E.progress.toFixed(1)+"%",null,"\u25d1","#7c5cff")}
+        ${this.kpiCard("Progress",E.progress.toFixed(1)+"%",null,"\u25d1","#0bbf9a")}
         ${this.kpiCard("Projected Freedom",fiDateLabel,null,"\u2691",E.onTrack?"#2fd68a":"#ffb454")}
         ${this.kpiCard("Age at Freedom",fiAge?fiAge+" yrs":"—",null,"\u25c8","#e0b34d")}
         ${this.kpiCard("Time Remaining",yrsLeft?yrsLeft.toFixed(1)+" yrs":"—",null,"\u23f3","#ff6b6b")}
@@ -3560,7 +3993,7 @@ const App = {
             <circle cx="80" cy="80" r="${R}" fill="none" stroke="url(#jg)" stroke-width="13" stroke-linecap="round"
               stroke-dasharray="${C}" stroke-dashoffset="${off}"/>
             <defs><linearGradient id="jg" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#5b8cff"/><stop offset="100%" stop-color="#2fd68a"/></linearGradient></defs>
+              <stop offset="0%" stop-color="#12cf8f"/><stop offset="100%" stop-color="#2fd68a"/></linearGradient></defs>
           </svg>
           <div style="flex:1;min-width:180px">
             <div class="caption">JOURNEY TO ${a.fiYear}</div>
@@ -3657,7 +4090,7 @@ const App = {
       labels.push(this.monthsToDate(m)); wealth.push(E.series[m].v); target.push(E.series[m].target); }
     this.chart('jChart',{type:'line',data:{labels,datasets:[
       {label:'Projected wealth',data:wealth,borderColor:this.css('--accent'),
-        backgroundColor:this.gradient('jChart','rgba(91,140,255,.3)','rgba(91,140,255,0)'),fill:true,tension:.3,borderWidth:2.5,pointRadius:0},
+        backgroundColor:this.gradient('jChart','rgba(18,207,143,.3)','rgba(18,207,143,0)'),fill:true,tension:.3,borderWidth:2.5,pointRadius:0},
       {label:'Freedom bar',data:target,borderColor:this.css('--green'),borderDash:[6,4],fill:false,tension:.3,borderWidth:2,pointRadius:0}]},
       options:{plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>CUR+' '+(v/100000).toFixed(0)+'L'}},
         x:{ticks:{maxTicksLimit:10}}}}});
@@ -3678,7 +4111,7 @@ const App = {
       options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'}}}}});
     this.chart('jHist',{type:'line',data:{labels:hist.map(monthLabel),datasets:[
       {label:'Net worth',data:histNW,borderColor:this.css('--accent2'),
-        backgroundColor:this.gradient('jHist','rgba(124,92,255,.3)','rgba(124,92,255,0)'),fill:true,tension:.35,borderWidth:2.5,pointRadius:3},
+        backgroundColor:this.gradient('jHist','rgba(11,191,154,.3)','rgba(11,191,154,0)'),fill:true,tension:.35,borderWidth:2.5,pointRadius:3},
       {label:'Freedom bar',data:histTarget,borderColor:this.css('--green'),borderDash:[5,4],fill:false,borderWidth:1.8,pointRadius:0}]},
       options:{plugins:{legend:{position:'bottom'}},scales:{y:{ticks:{callback:v=>CUR+' '+(v/100000).toFixed(0)+'L'}}}}});
   },
@@ -3764,7 +4197,7 @@ const App = {
     const subScores=[
       ['Diversification',d.sc.diversification],['Concentration',d.sc.concentration],
       ['Performance',d.sc.performance],['Income',d.sc.income],['Conviction',d.sc.conviction]];
-    const secColors=['#5b8cff','#7c5cff','#2fd68a','#e0b34d','#ff6b6b','#3ad0e0','#ffb454','#a0b0c8'];
+    const secColors=['#12cf8f','#0bbf9a','#2fd68a','#e0b34d','#ff6b6b','#3ad0e0','#ffb454','#a0b0c8'];
     host.innerHTML=`
       <div class="grid" style="grid-template-columns:300px 1fr;gap:16px;align-items:stretch">
         <div class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
@@ -3781,9 +4214,9 @@ const App = {
       </div>
 
       <div class="grid g-kpi" style="margin-top:16px">
-        ${this.kpiCard("Market Value",fmt(d.mv),null,"◑","#5b8cff")}
+        ${this.kpiCard("Market Value",fmt(d.mv),null,"◑","#12cf8f")}
         ${this.kpiCard("Unrealised P/L",fmtC(d.pl),d.cost?d.pl/d.cost*100:null,"▲",d.pl>=0?"#2fd68a":"#ff6b6b")}
-        ${this.kpiCard("Return on Cost",d.cost?fmtPct(d.myRet):"N/A",null,"◰","#7c5cff")}
+        ${this.kpiCard("Return on Cost",d.cost?fmtPct(d.myRet):"N/A",null,"◰","#0bbf9a")}
         ${this.kpiCard("Alpha vs DSEX",d.dsexRet?fmtPct(d.alpha):"set DSEX",null,"⚔","#3ad0e0")}
         ${this.kpiCard("Dividend Yield",d.divYield?fmtPct(d.divYield):"—",null,"◉","#e0b34d")}
         ${this.kpiCard("Top Weight",d.topName+" "+d.topWeight.toFixed(0)+"%",null,"◰",d.topWeight>=40?"#ff6b6b":d.topWeight>=25?"#ffb454":"#2fd68a")}
@@ -3791,7 +4224,7 @@ const App = {
 
       <div class="grid g-2" style="margin-top:16px">
         <div class="card"><h3>◑ Sector Mix</h3><div class="caption">Concentration by sector</div>
-          ${this.svgDonut(d.secArr.map(([k,v],i)=>({label:k,value:v,color:secColors[i%secColors.length]})),{top:"Equity",mid:fmt(d.mv)})}
+          ${this.svgDonut(d.secArr.map(([k,v],i)=>({label:k,value:v,color:secColors[i%secColors.length]})),{top:"Equity",mid:fmt(d.mv)},'sectorDrill')}
           <div class="legend">${d.secArr.map(([k,v],i)=>`<div class="li"><span class="dot" style="background:${secColors[i%secColors.length]}"></span>${k} · ${(v/d.mv*100).toFixed(0)}%</div>`).join('')}</div>
         </div>
         <div class="card"><h3>⚖ Position Weights</h3><div class="caption">Each holding as a share of equity</div>
@@ -4132,8 +4565,8 @@ const App = {
       <div class="grid g-kpi">
         ${this.kpiCard("Priority Items",counts.high,null,"\u26a0","#ff6b6b")}
         ${this.kpiCard("To Review",counts.med,null,"\u25c6","#ffb454")}
-        ${this.kpiCard("Housekeeping",counts.low,null,"\u25cb","#5b8cff")}
-        ${this.kpiCard("Real Return",(this.blendedReturn()-this.A().inflation).toFixed(1)+"%",null,"\u2696","#7c5cff")}
+        ${this.kpiCard("Housekeeping",counts.low,null,"\u25cb","#12cf8f")}
+        ${this.kpiCard("Real Return",(this.blendedReturn()-this.A().inflation).toFixed(1)+"%",null,"\u2696","#0bbf9a")}
       </div>
       <div class="card" style="margin-top:16px"><h3>\u25c9 How to read this</h3>
         <p style="font-size:12.5px;color:var(--txt-dim);margin-top:6px;line-height:1.6">
